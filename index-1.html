@@ -1,0 +1,4057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sahil eBook Studio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,sans-serif;
+background:#070914;
+color:#fff;
+overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+z-index:-2;
+background:
+radial-gradient(circle at 10% 15%,rgba(101,67,255,.22),transparent 28%),
+radial-gradient(circle at 90% 35%,rgba(0,174,255,.17),transparent 30%),
+radial-gradient(circle at 50% 85%,rgba(255,52,176,.12),transparent 30%),
+#070914
+}
+
+.navbar{
+height:72px;
+padding:0 5%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(7,9,20,.82);
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.08)
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:900
+}
+
+.logoIcon{
+width:39px;
+height:39px;
+display:grid;
+place-items:center;
+border-radius:12px;
+background:linear-gradient(135deg,#625aff,#bf45ff)
+}
+
+.nav{
+display:flex;
+gap:25px;
+color:#aeb4cc;
+font-size:14px
+}
+
+.topBtns{display:flex;gap:8px}
+
+.btnDark{
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.04);
+color:#fff;
+padding:10px 13px;
+border-radius:11px
+}
+
+.cartWrap{position:relative}
+
+.cartCount{
+position:absolute;
+right:-7px;
+top:-8px;
+background:#8055ff;
+width:21px;
+height:21px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:11px
+}
+
+.hero{
+min-height:90vh;
+padding:65px 6%;
+display:grid;
+grid-template-columns:1.05fr .95fr;
+align-items:center;
+gap:45px
+}
+
+.badge{
+display:inline-block;
+border:1px solid rgba(139,105,255,.38);
+background:rgba(113,77,255,.12);
+color:#c9bcff;
+padding:9px 15px;
+border-radius:30px;
+font-size:13px;
+margin-bottom:20px
+}
+
+.hero h1{
+font-size:clamp(48px,7vw,85px);
+line-height:1;
+letter-spacing:-3px
+}
+
+.gradient{
+display:block;
+margin-top:10px;
+background:linear-gradient(90deg,#64d8ff,#956aff,#ff65c2);
+-webkit-background-clip:text;
+color:transparent
+}
+
+.hero p{
+max-width:600px;
+margin:25px 0;
+line-height:1.8;
+color:#9ca4bf
+}
+
+.btnMain{
+border:0;
+background:linear-gradient(135deg,#625bff,#a143ff);
+color:white;
+padding:14px 21px;
+border-radius:12px;
+font-weight:800;
+box-shadow:0 12px 35px rgba(103,78,255,.28)
+}
+
+.heroButtons{
+display:flex;
+gap:12px;
+flex-wrap:wrap
+}
+
+.stats{
+display:flex;
+gap:35px;
+margin-top:38px
+}
+
+.stats strong{
+display:block;
+font-size:24px
+}
+
+.stats span{
+font-size:11px;
+color:#7f879f
+}
+
+.stage{
+height:500px;
+position:relative
+}
+
+.floatBook{
+position:absolute;
+width:185px;
+height:275px;
+border-radius:12px 20px 20px 11px;
+padding:22px;
+box-shadow:-8px 8px 0 rgba(255,255,255,.07),0 30px 60px rgba(0,0,0,.5);
+animation:float 4s ease-in-out infinite
+}
+
+.floatBook small{font-size:8px;letter-spacing:2px}
+
+.floatBook b{
+display:block;
+font-size:52px;
+margin-top:55px
+}
+
+.floatBook h3{font-size:21px}
+
+.f1{
+left:5%;
+top:40px;
+background:linear-gradient(145deg,#192657,#754dff);
+transform:rotate(-8deg)
+}
+
+.f2{
+right:2%;
+top:110px;
+background:linear-gradient(145deg,#09294d,#008ddf);
+transform:rotate(9deg);
+animation-delay:-1.2s
+}
+
+.f3{
+left:32%;
+bottom:12px;
+background:linear-gradient(145deg,#4c1644,#d63d95);
+transform:rotate(4deg);
+animation-delay:-2s
+}
+
+@keyframes float{
+50%{translate:0 -20px}
+}
+
+.section{padding:85px 6%}
+
+.heading{
+text-align:center;
+max-width:700px;
+margin:0 auto 40px
+}
+
+.kicker{
+font-size:11px;
+letter-spacing:2px;
+font-weight:900;
+color:#9c7eff
+}
+
+.heading h2{
+font-size:clamp(31px,5vw,47px);
+margin:12px 0
+}
+
+.heading p{
+color:#8f97b1;
+line-height:1.7
+}
+
+.filters{
+display:flex;
+gap:8px;
+justify-content:center;
+flex-wrap:wrap;
+margin-bottom:30px
+}
+
+.search{
+width:min(100%,330px);
+background:#101323;
+border:1px solid rgba(255,255,255,.1);
+border-radius:11px;
+padding:13px;
+color:white;
+outline:0
+}
+
+.filter{
+border:1px solid rgba(255,255,255,.1);
+background:#111424;
+color:#a7adc2;
+padding:10px 13px;
+border-radius:10px
+}
+
+.filter.active{
+background:#7358ff;
+color:white
+}
+
+.bookGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px
+}
+
+.card{
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.08);
+border-radius:19px;
+padding:14px
+}
+
+.cover{
+height:325px;
+border-radius:13px;
+padding:25px;
+display:flex;
+flex-direction:column;
+box-shadow:0 20px 40px rgba(0,0,0,.35)
+}
+
+.cover small{
+font-size:8px;
+letter-spacing:2px
+}
+
+.cover b{
+font-size:60px;
+margin-top:65px
+}
+
+.cover h3{font-size:23px}
+
+.coverArt{
+background-size:cover!important;
+background-position:center!important;
+background-repeat:no-repeat!important;
+padding:0!important;
+}
+
+.c1{background:linear-gradient(145deg,#18265a,#744cff)}
+.c2{background:linear-gradient(145deg,#07284b,#008fe5)}
+.c3{background:linear-gradient(145deg,#4b1543,#df419c)}
+.c4{background:linear-gradient(145deg,#163f32,#00aa72)}
+.c5{background:linear-gradient(145deg,#4b2b15,#ff7c25)}
+.c6{background:linear-gradient(145deg,#1d2146,#ff4e70)}
+
+.info{padding:17px 4px 5px}
+
+.category{
+font-size:11px;
+color:#a088ff
+}
+
+.info h3{
+margin:8px 0;
+font-size:19px
+}
+
+.desc{
+font-size:13px;
+line-height:1.6;
+color:#9098b1;
+min-height:42px
+}
+
+.rating{
+color:#ffd259;
+font-size:12px;
+margin-top:8px
+}
+
+.bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+margin-top:16px
+}
+
+.price{
+font-size:24px;
+font-weight:900
+}
+
+.price del{
+font-size:11px;
+color:#707991
+}
+
+.actions{display:flex;gap:5px}
+
+.actions button{
+border:0;
+padding:9px 10px;
+border-radius:9px;
+color:white
+}
+
+.view{background:#24283c}
+.buy{background:linear-gradient(135deg,#655cff,#9a4cff)}
+
+.featureGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:17px
+}
+
+.feature{
+padding:24px;
+border-radius:17px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.075)
+}
+
+.feature i{font-style:normal;font-size:28px}
+.feature h3{margin:12px 0 6px}
+.feature p{color:#8f97b0;font-size:13px;line-height:1.6}
+
+.support{
+display:grid;
+grid-template-columns:.8fr 1.2fr;
+gap:22px
+}
+
+.box{
+padding:28px;
+border-radius:20px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08)
+}
+
+.input{
+width:100%;
+padding:13px;
+background:#0d1020;
+border:1px solid rgba(255,255,255,.1);
+border-radius:10px;
+color:white;
+outline:none;
+margin-top:10px
+}
+
+textarea.input{
+height:110px;
+resize:none
+}
+
+footer{
+border-top:1px solid rgba(255,255,255,.08);
+padding:40px 6%;
+color:#858da7;
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:25px
+}
+
+footer strong{color:white}
+footer p{font-size:13px;line-height:1.7;margin-top:7px}
+
+footer button{
+border:0;
+background:none;
+color:#707990;
+margin-top:14px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.78);
+z-index:3000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px
+}
+
+.modal.show{display:flex}
+
+.modalBox{
+width:min(100%,600px);
+max-height:91vh;
+overflow:auto;
+background:#101322;
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+padding:24px
+}
+
+.close{
+float:right;
+width:36px;
+height:36px;
+border:0;
+border-radius:50%;
+background:#24283c;
+color:white
+}
+
+.paymentCard{
+padding:20px;
+margin:17px 0;
+border-radius:15px;
+background:rgba(108,78,255,.09);
+border:1px solid rgba(126,94,255,.25)
+}
+
+.amount{
+font-size:34px;
+font-weight:900;
+margin:7px 0
+}
+
+.qr{
+width:190px;
+height:190px;
+background:white;
+border-radius:13px;
+padding:8px;
+display:block;
+margin:17px auto
+}
+
+.notice{
+font-size:12px;
+line-height:1.6;
+padding:11px;
+border-radius:9px;
+background:rgba(255,188,61,.08);
+border:1px solid rgba(255,188,61,.22);
+color:#f3c971
+}
+
+.order{
+padding:17px;
+background:#181b2d;
+border-radius:13px;
+margin-top:13px
+}
+
+.pending{color:#ffca5f}
+.approved{color:#61dda0}
+.rejected{color:#ff6f89}
+
+.full{width:100%}
+
+.cart{
+position:fixed;
+right:-100%;
+top:0;
+height:100vh;
+width:min(92%,390px);
+background:#0c0f1c;
+z-index:2500;
+border-left:1px solid rgba(255,255,255,.08);
+padding:22px;
+transition:.35s;
+overflow:auto
+}
+
+.cart.open{right:0}
+
+.cartHead{
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.cartItem{
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid rgba(255,255,255,.07);
+padding:16px 0
+}
+
+.remove{
+border:0;
+background:none;
+color:#ff728e
+}
+
+.total{
+display:flex;
+justify-content:space-between;
+font-size:21px;
+font-weight:bold;
+margin:22px 0
+}
+
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translate(-50%,120px);
+background:white;
+color:#111;
+padding:11px 18px;
+border-radius:11px;
+font-weight:bold;
+font-size:13px;
+z-index:5000;
+transition:.3s
+}
+
+.toast.show{transform:translate(-50%,0)}
+
+.tabs{
+display:flex;
+gap:7px;
+overflow:auto;
+margin:15px 0
+}
+
+.tab{
+white-space:nowrap;
+border:1px solid rgba(255,255,255,.1);
+background:#181b2c;
+color:#adb3c8;
+padding:9px 12px;
+border-radius:9px
+}
+
+.tab.active{
+background:#7358ff;
+color:white
+}
+
+.adminBook{
+padding:15px;
+background:#171a2b;
+border-radius:12px;
+margin:10px 0
+}
+
+.adminButtons{
+display:flex;
+gap:8px;
+margin-top:10px
+}
+
+.adminButtons button{
+border:0;
+padding:8px 10px;
+border-radius:8px;
+color:#fff
+}
+
+.approveBtn{background:#15865c}
+.rejectBtn{background:#b93a55}
+
+
+/* ===== CUSTOMER OTP LOGIN EXPERIENCE ===== */
+.customerAuthModal{
+  padding:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,#261b61 0,transparent 30%),
+    radial-gradient(circle at 85% 75%,#092b50 0,transparent 32%),
+    #050711;
+}
+
+.customerAuthModal.show{display:flex}
+
+.customerLoginScene{
+  position:relative;
+  z-index:10;
+  width:410px;
+  max-width:92%;
+  perspective:1200px;
+}
+
+.customerLoginCard{
+  position:relative;
+  max-height:92vh;
+  overflow:auto;
+  padding:32px;
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  box-shadow:0 35px 80px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.12);
+  animation:customerCardEntrance .9s cubic-bezier(.2,.8,.2,1);
+  scrollbar-width:thin;
+}
+
+.customerLoginCard::before{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:500px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:rotate(30deg);
+  top:-180px;
+  left:-300px;
+  animation:customerShine 6s infinite;
+  pointer-events:none;
+}
+
+@keyframes customerCardEntrance{
+  from{opacity:0;transform:translateY(60px) rotateX(12deg) scale(.9)}
+  to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}
+}
+
+@keyframes customerShine{
+  0%{left:-300px}
+  35%,100%{left:600px}
+}
+
+.customerLoginClose{
+  position:fixed;
+  z-index:20;
+  right:20px;
+  top:20px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(17,20,36,.76);
+  color:#fff;
+  font-size:28px;
+  line-height:1;
+  backdrop-filter:blur(12px);
+}
+
+.customerAurora{
+  position:absolute;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  filter:blur(130px);
+  opacity:.22;
+  pointer-events:none;
+}
+.customerAurora1{background:#7c4dff;top:-250px;left:-150px;animation:customerAurora1 9s infinite alternate ease-in-out}
+.customerAurora2{background:#00c8ff;right:-250px;bottom:-250px;animation:customerAurora2 11s infinite alternate ease-in-out}
+.customerAurora3{width:350px;height:350px;background:#ff3cac;left:45%;bottom:-250px;animation:customerAurora3 8s infinite alternate ease-in-out}
+
+@keyframes customerAurora1{to{transform:translate(220px,150px) scale(1.3)}}
+@keyframes customerAurora2{to{transform:translate(-220px,-160px) scale(1.25)}}
+@keyframes customerAurora3{to{transform:translate(-120px,-180px)}}
+
+.customerParticle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.4;
+  animation:customerParticleMove linear infinite;
+}
+.cp1{left:10%;top:80%;animation-duration:8s}.cp2{left:20%;top:70%;animation-duration:11s}.cp3{left:40%;top:90%;animation-duration:9s}
+.cp4{left:60%;top:75%;animation-duration:13s}.cp5{left:75%;top:85%;animation-duration:10s}.cp6{left:90%;top:65%;animation-duration:12s}
+
+@keyframes customerParticleMove{
+  from{transform:translateY(0) scale(.5);opacity:0}
+  30%{opacity:.7}
+  to{transform:translateY(-700px) scale(1.4);opacity:0}
+}
+
+.customerFloatBook{
+  position:absolute;
+  width:90px;
+  height:125px;
+  border-radius:5px 12px 12px 5px;
+  padding:12px;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:.7px;
+  box-shadow:-5px 6px 0 rgba(255,255,255,.07),0 20px 35px rgba(0,0,0,.35);
+  opacity:.55;
+  pointer-events:none;
+}
+.customerFloatBook span{display:block;font-size:28px;margin-top:25px;letter-spacing:0}
+.cfb1{left:5%;top:14%;background:linear-gradient(145deg,#4632a8,#9b5cff);animation:customerBookFloat1 6s ease-in-out infinite}
+.cfb2{right:6%;top:18%;background:linear-gradient(145deg,#075078,#00b9ff);animation:customerBookFloat2 7s ease-in-out infinite}
+.cfb3{left:8%;bottom:8%;background:linear-gradient(145deg,#741c55,#ff4bac);animation:customerBookFloat3 8s ease-in-out infinite}
+.cfb4{right:8%;bottom:7%;background:linear-gradient(145deg,#0f644e,#21d79c);animation:customerBookFloat4 6.5s ease-in-out infinite}
+
+@keyframes customerBookFloat1{0%,100%{transform:translateY(0) rotate(-12deg)}50%{transform:translateY(-30px) rotate(-4deg)}}
+@keyframes customerBookFloat2{0%,100%{transform:translateY(0) rotate(10deg)}50%{transform:translateY(-35px) rotate(3deg)}}
+@keyframes customerBookFloat3{0%,100%{transform:translateY(0) rotate(8deg)}50%{transform:translateY(-25px) rotate(15deg)}}
+@keyframes customerBookFloat4{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-35px) rotate(-14deg)}}
+
+.customerBookLogo{
+  width:80px;
+  height:65px;
+  margin:0 auto 15px;
+  position:relative;
+  perspective:500px;
+}
+.customerLogoLeft,.customerLogoRight{
+  position:absolute;
+  top:0;
+  width:40px;
+  height:58px;
+  background:linear-gradient(145deg,#765cff,#ae5bff);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 10px 30px rgba(110,80,255,.3);
+}
+.customerLogoLeft{left:0;border-radius:7px 2px 2px 7px;transform-origin:right;animation:customerLeftPage 3s ease-in-out infinite}
+.customerLogoRight{right:0;border-radius:2px 7px 7px 2px;transform-origin:left;animation:customerRightPage 3s ease-in-out infinite}
+@keyframes customerLeftPage{0%,100%{transform:rotateY(25deg)}50%{transform:rotateY(5deg)}}
+@keyframes customerRightPage{0%,100%{transform:rotateY(-25deg)}50%{transform:rotateY(-5deg)}}
+
+.customerBrand{text-align:center;font-size:11px;font-weight:800;letter-spacing:3px;color:#a991ff}
+.customerAuthTitle{text-align:center;font-size:30px;margin-top:9px}
+.customerGradientText{background:linear-gradient(90deg,#69dcff,#9e78ff,#ff74c8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.customerAuthSubtitle{text-align:center;color:#9099b5;font-size:13px;line-height:1.6;margin:10px 0 24px}
+.customerAuthStatus{margin:0 0 14px;padding:11px 12px;border-radius:11px;font-size:12px;line-height:1.55;text-align:center}
+
+.customerInputGroup{position:relative;margin-top:14px}
+.customerAuthInput{
+  width:100%;height:53px;padding:0 48px 0 16px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.09);outline:none;background:rgba(5,7,17,.65);color:white;transition:.3s
+}
+.customerAuthInput::placeholder{color:#69718a}
+.customerAuthInput:focus{border-color:#7f65ff;box-shadow:0 0 0 3px rgba(126,96,255,.12),0 8px 25px rgba(91,68,255,.08)}
+.customerOtpInput{letter-spacing:4px;font-weight:800}
+.customerInputIcon{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:15px}
+
+.customerPrimaryButton,.customerSecondaryButton{
+  width:100%;height:52px;border-radius:14px;color:white;font-weight:800;letter-spacing:.4px;cursor:pointer;transition:.3s
+}
+.customerPrimaryButton{
+  border:0;background:linear-gradient(135deg,#625bff,#914aff,#c34cff);background-size:200%;
+  box-shadow:0 13px 35px rgba(105,72,255,.35);animation:customerButtonGradient 4s infinite alternate
+}
+.customerPrimaryButton:hover{transform:translateY(-2px);box-shadow:0 18px 45px rgba(105,72,255,.5)}
+.customerPrimaryButton:active{transform:scale(.98)}
+.customerSecondaryButton{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+@keyframes customerButtonGradient{from{background-position:left}to{background-position:right}}
+
+.customerOtpHint{font-size:11px;line-height:1.5;color:#b9b1d8;text-align:center;padding:9px 10px;border-radius:10px;background:rgba(124,77,255,.09);border:1px solid rgba(124,77,255,.20)}
+.customerSwitchText{text-align:center;margin-top:20px;font-size:12px;color:#838ca7}
+.customerSwitchText span{color:#ae94ff;font-weight:bold;cursor:pointer}
+
+.customerSuccessScreen{text-align:center;padding:8px 0}
+.customerSuccessBook{width:160px;height:110px;margin:15px auto 30px;position:relative;perspective:800px}
+.customerSuccessLeft,.customerSuccessRight{
+  position:absolute;width:80px;height:105px;top:0;background:linear-gradient(145deg,#f7f3ff,#d8ceff);color:#6749dd;
+  display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 20px 35px rgba(0,0,0,.25)
+}
+.customerSuccessLeft{left:0;border-radius:10px 2px 2px 10px;transform-origin:right;animation:customerOpenLeft .8s cubic-bezier(.2,.8,.2,1)}
+.customerSuccessRight{right:0;border-radius:2px 10px 10px 2px;transform-origin:left;animation:customerOpenRight .8s cubic-bezier(.2,.8,.2,1)}
+@keyframes customerOpenLeft{from{transform:rotateY(90deg)}to{transform:rotateY(15deg)}}
+@keyframes customerOpenRight{from{transform:rotateY(-90deg)}to{transform:rotateY(-15deg)}}
+.customerSuccessCheck{width:58px;height:58px;margin:-15px auto 15px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#20d79b,#09a777);font-size:27px;box-shadow:0 10px 30px rgba(30,215,155,.3);animation:customerCheckPop .5s .5s both}
+@keyframes customerCheckPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.customerSuccessScreen h2{font-size:27px}
+.customerLoggedMeta{margin-top:9px;color:#929ab4;line-height:1.6;font-size:12px}
+.customerDashboardData{text-align:left;margin-top:16px}
+
+@media(max-width:760px){
+  .customerFloatBook{width:60px;height:85px;font-size:6px;opacity:.22}
+  .customerFloatBook span{font-size:19px;margin-top:16px}
+  .cfb1{left:2%;top:9%}.cfb2{right:2%;top:12%}.cfb3{left:2%;bottom:5%}.cfb4{right:2%;bottom:5%}
+  .customerLoginClose{right:12px;top:12px;width:40px;height:40px}
+}
+
+@media(max-width:600px){
+  .customerLoginCard{padding:27px 21px;border-radius:24px;max-height:88vh}
+  .customerAuthTitle{font-size:26px}
+  .customerLoginScene{max-width:90%}
+}
+
+@media(max-width:900px){
+.nav{display:none}
+.hero{grid-template-columns:1fr}
+.bookGrid{grid-template-columns:repeat(2,1fr)}
+.featureGrid{grid-template-columns:repeat(2,1fr)}
+.support{grid-template-columns:1fr}
+footer{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+.navbar{padding:0 4%}
+.logo span{font-size:14px}
+.hero{padding:50px 5%}
+.hero h1{font-size:44px}
+.stage{height:420px}
+.floatBook{width:145px;height:220px;padding:17px}
+.floatBook b{font-size:39px;margin-top:38px}
+.floatBook h3{font-size:17px}
+.f1{left:3%}
+.f2{right:1%}
+.f3{left:29%}
+.section{padding:70px 5%}
+.bookGrid{grid-template-columns:1fr}
+.cover{height:390px}
+.featureGrid{grid-template-columns:1fr}
+.stats{gap:22px}
+}
+
+
+/* =========================================================
+   CINEMATIC HOME — warm library room
+   ========================================================= */
+.homeHero{
+  position:relative;width:100%;height:100svh;min-height:650px;overflow:hidden;
+  perspective:1400px;background:radial-gradient(circle at 50% 58%,#38200d 0%,#160d08 25%,#080605 55%,#030303 100%);
+  isolation:isolate;
+}
+.homeGrain{position:absolute;inset:0;z-index:80;pointer-events:none;opacity:.045;background-image:repeating-radial-gradient(circle at 20% 30%,white 0,transparent 1px,transparent 3px);background-size:7px 7px}
+.homeVignette{position:absolute;inset:0;z-index:70;pointer-events:none;box-shadow:inset 0 0 180px 80px rgba(0,0,0,.85)}
+.homeNav{position:absolute;z-index:100;top:0;left:0;width:100%;padding:25px 5%;display:flex;align-items:center;justify-content:space-between}
+.homeLogo{font-family:Georgia,serif;font-size:19px;letter-spacing:1px;color:#fff}.homeLogo span{color:#d4a15d}
+.homeNavlinks{display:flex;gap:30px}.homeNavlinks a{color:#aaa095;font-size:12px;text-decoration:none;transition:.3s}.homeNavlinks a:hover{color:#e5bc7c}
+.homeAccountBtn{padding:10px 19px;border:1px solid rgba(230,185,120,.28);border-radius:30px;color:#f0cf9b;background:rgba(255,200,120,.07);backdrop-filter:blur(10px);cursor:pointer;font-weight:800;letter-spacing:.25px;box-shadow:0 8px 30px rgba(0,0,0,.22);transition:.3s}
+.homeAccountBtn:hover{transform:translateY(-2px);background:rgba(255,200,120,.13);border-color:rgba(230,185,120,.48)}
+.homeRoom{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .25s ease-out}
+.homeBackWall{position:absolute;width:70%;height:78%;left:15%;top:11%;transform:translateZ(-350px);background:linear-gradient(90deg,#0b0806,#18100b,#0b0806);border:1px solid rgba(255,200,120,.05);box-shadow:inset 0 0 100px #000}
+.homeShelf{position:absolute;top:8%;width:23%;height:85%;padding:18px;background:linear-gradient(90deg,#120b07,#392113,#170d08);border:7px solid #1b1009;box-shadow:0 20px 70px #000,inset 0 0 35px #000;transform-style:preserve-3d}
+.homeLeftShelf{left:-2%;transform:rotateY(15deg) translateZ(-80px)}.homeRightShelf{right:-2%;transform:rotateY(-15deg) translateZ(-80px)}
+.homeShelfRow{height:24%;border-bottom:8px solid #1a0e08;display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:0 8px 8px}
+.hb{height:70%;flex:1;max-width:20px;border-radius:2px 2px 0 0;box-shadow:inset 2px 0 rgba(255,255,255,.08),inset -2px 0 rgba(0,0,0,.4);transform-origin:bottom;animation:homeShelfPulse 5s ease-in-out infinite;display:block}
+.hb:nth-child(2n){height:82%}.hb:nth-child(3n){height:60%;transform:rotate(3deg)}.hb:nth-child(4n){height:88%}.hb:nth-child(5n){transform:rotate(-4deg)}
+@keyframes homeShelfPulse{0%,100%{filter:brightness(.75)}50%{filter:brightness(1)}}
+.homeHero .red{background:#713a28}.homeHero .gold{background:#80602c}.homeHero .green{background:#304b39}.homeHero .blue{background:#293b50}.homeHero .brown{background:#4c2e20}.homeHero .purple{background:#49364e}
+.homeLamp{position:absolute;left:50%;top:14%;transform:translateX(-50%) translateZ(40px);z-index:15}.homeLampWire{width:2px;height:80px;margin:auto;background:#31261d}.homeLampShade{width:145px;height:65px;border-radius:80px 80px 15px 15px;background:linear-gradient(#4a321c,#17100b);box-shadow:inset 0 -10px 20px rgba(255,180,70,.15);position:relative}
+.homeLampLight{position:absolute;width:520px;height:480px;left:50%;top:105px;transform:translateX(-50%);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);background:linear-gradient(to bottom,rgba(255,190,91,.18),rgba(255,160,50,.04),transparent);filter:blur(12px);pointer-events:none}.homeBulb{position:absolute;width:18px;height:18px;border-radius:50%;background:#ffc66d;left:50%;bottom:-5px;transform:translateX(-50%);box-shadow:0 0 20px #ffb44c,0 0 60px rgba(255,170,60,.7),0 0 120px rgba(255,160,40,.3);animation:homeBulbPulse 3s ease-in-out infinite}
+@keyframes homeBulbPulse{50%{box-shadow:0 0 30px #ffc268,0 0 90px rgba(255,170,60,.8),0 0 150px rgba(255,150,40,.4)}}
+.homeDesk{position:absolute;width:80%;height:23%;left:10%;bottom:-8%;transform:rotateX(65deg) translateZ(40px);transform-origin:center bottom;background:linear-gradient(90deg,#24150d,#5a321b,#2a180e);border-top:4px solid #724524;box-shadow:0 -20px 70px rgba(0,0,0,.7)}
+.homeBookScene{position:absolute;width:430px;height:310px;left:50%;bottom:8%;transform:translateX(-50%) translateZ(150px);transform-style:preserve-3d;z-index:30;animation:homeBookFloat 4s ease-in-out infinite}
+@keyframes homeBookFloat{0%,100%{transform:translateX(-50%) translateY(0) translateZ(150px) rotateX(6deg)}50%{transform:translateX(-50%) translateY(-12px) translateZ(175px) rotateX(3deg)}}
+.homeOpenBook{position:absolute;width:100%;height:100%;left:0;top:0;perspective:1000px;transform-style:preserve-3d}.homePage{position:absolute;width:50%;height:240px;top:25px;background:linear-gradient(90deg,#d8bd88,#f2dfb4);color:#2e2115;box-shadow:0 15px 30px rgba(0,0,0,.55);overflow:hidden}.homeLeftPage{left:0;border-radius:10px 3px 3px 15px;transform-origin:right center;transform:rotateY(20deg) rotateZ(-4deg)}.homeRightPage{right:0;border-radius:3px 10px 15px 3px;transform-origin:left center;transform:rotateY(-20deg) rotateZ(4deg)}
+.homePage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(50,30,10,.03) 6px);pointer-events:none}.homePageContent{padding:35px 25px;text-align:center}.homePageSmall{font-size:8px;letter-spacing:3px;color:#85652f}.homePage h2{margin-top:17px;font-family:Georgia,serif;font-size:27px;line-height:1.05}.homePage p{margin-top:17px;font-family:Georgia,serif;font-size:10px;line-height:1.6;opacity:.65}
+.homeFlipPage{position:absolute;width:49%;height:238px;right:50%;top:26px;z-index:10;transform-origin:right center;background:linear-gradient(90deg,#f1dba9,#c7a66b);border-radius:10px 2px 2px 10px;animation:homePageFlip 6s ease-in-out infinite;box-shadow:0 10px 25px rgba(0,0,0,.35)}
+@keyframes homePageFlip{0%,30%{transform:rotateY(5deg)}45%,55%{transform:rotateY(170deg)}70%,100%{transform:rotateY(5deg)}}
+.homeBookShadow{position:absolute;width:380px;height:65px;left:50%;bottom:0;transform:translateX(-50%) rotateX(75deg);background:radial-gradient(ellipse,rgba(0,0,0,.75),transparent 70%);filter:blur(8px)}
+.homeHeroContent{position:absolute;z-index:45;left:50%;top:28%;width:min(800px,90%);transform:translateX(-50%);text-align:center;pointer-events:none}.homeSmallTitle{color:#d5a65d;font-size:10px;font-weight:bold;letter-spacing:5px;margin-bottom:15px;animation:homeFadeDown 1s ease both}.homeHeroContent h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(45px,6vw,82px);line-height:.95;font-weight:500;text-shadow:0 10px 30px #000;animation:homeTitleReveal 1.2s .15s both}.homeHeroContent h1 span{color:#e3b872;font-style:italic}.homeHeroContent p{max-width:510px;margin:19px auto;color:#aaa093;font-size:13px;line-height:1.7;text-shadow:0 4px 15px #000;animation:homeTitleReveal 1.2s .35s both}
+@keyframes homeFadeDown{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:translateY(0)}}@keyframes homeTitleReveal{from{opacity:0;transform:translateY(25px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.homeExplore{pointer-events:auto;display:inline-block;margin-top:3px;padding:13px 25px;color:#1a1008;text-decoration:none;font-size:11px;font-weight:bold;letter-spacing:.5px;border-radius:30px;background:linear-gradient(135deg,#f0d29b,#bd8540);box-shadow:0 10px 35px rgba(211,157,79,.25);transition:.3s;animation:homeTitleReveal 1.2s .5s both}.homeExplore:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 15px 45px rgba(211,157,79,.4)}
+.homePaper{position:absolute;width:22px;height:29px;background:#cdb484;opacity:.35;z-index:25;box-shadow:0 5px 15px rgba(0,0,0,.4);animation:homePaperFloat linear infinite}.hp1{left:25%;top:65%;animation-duration:8s}.hp2{right:24%;top:50%;animation-duration:10s;animation-delay:-4s}.hp3{left:35%;top:45%;animation-duration:11s;animation-delay:-7s}.hp4{right:35%;top:72%;animation-duration:9s;animation-delay:-2s}
+@keyframes homePaperFloat{0%{transform:translateY(100px) rotate(0deg)}50%{transform:translateY(-80px) rotate(180deg) translateX(30px)}100%{transform:translateY(-250px) rotate(360deg) translateX(-20px);opacity:0}}
+
+/* Clean title-only eBook covers */
+#ebooks .card{
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+  border-color:rgba(255,255,255,.09);
+  box-shadow:0 18px 48px rgba(0,0,0,.20);
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+#ebooks .card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(227,184,114,.28);
+  box-shadow:0 25px 58px rgba(0,0,0,.30);
+}
+#ebooks .titleOnlyCover{
+  position:relative;
+  width:100%;
+  height:325px;
+  margin:0;
+  padding:28px 22px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 18px 38px rgba(0,0,0,.28);
+  transform:none;
+  border:1px solid rgba(255,255,255,.10);
+}
+#ebooks .titleOnlyCover::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.14),transparent 30%),linear-gradient(135deg,transparent 25%,rgba(255,255,255,.035),transparent 70%);
+  pointer-events:none;
+}
+#ebooks .titleOnlyCover::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  top:18px;
+  bottom:18px;
+  width:1px;
+  background:rgba(255,255,255,.12);
+  pointer-events:none;
+}
+#ebooks .titleOnlyCover h3{
+  position:relative;
+  z-index:1;
+  margin:0;
+  max-width:92%;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(22px,2.1vw,30px);
+  line-height:1.15;
+  font-weight:600;
+  letter-spacing:.2px;
+  color:#fff7ea;
+  text-shadow:0 5px 18px rgba(0,0,0,.45);
+}
+
+@media(max-width:750px){
+  .homeHero{min-height:680px}.homeNavlinks{display:none}.homeNav{padding:20px 5%}.homeLogo{font-size:16px}.homeAccountBtn{padding:9px 15px;font-size:12px}.homeHeroContent{top:21%}.homeHeroContent h1{font-size:47px}.homeHeroContent p{max-width:330px;font-size:11px}.homeLeftShelf,.homeRightShelf{width:30%;opacity:.72}.homeLeftShelf{left:-15%}.homeRightShelf{right:-15%}.homeBookScene{width:330px;height:250px;bottom:6%}.homePage{height:185px}.homeFlipPage{height:183px}.homePageContent{padding:25px 15px}.homePage h2{font-size:19px}.homePage p{font-size:7px}.homeLamp{top:11%}.homeLampShade{width:100px;height:45px}.homeLampWire{height:55px}.homeLampLight{width:380px}.homeSmallTitle{letter-spacing:3px;font-size:8px}
+  #ebooks .titleOnlyCover{width:100%;height:285px;transform:none}
+}
+
+</style>
+</head>
+<body>
+<span id="cartCount" hidden>0</span>
+
+
+<!-- ===== CINEMATIC HOME ===== -->
+<section class="homeHero" id="home">
+  <div class="homeGrain"></div>
+  <div class="homeVignette"></div>
+
+  <nav class="homeNav">
+    <div class="homeLogo">Sahil <span>eBook</span> Studio</div>
+    <div class="homeNavlinks">
+      <a href="#home">Home</a>
+      <a href="#ebooks">eBooks</a>
+      <a href="#about">About</a>
+      <a href="#support">Support</a>
+    </div>
+    <button id="homeAccountBtn" class="homeAccountBtn" onclick="openDashboard()">Login</button>
+  </nav>
+
+  <div class="homeRoom" id="homeRoom">
+    <div class="homeBackWall"></div>
+
+    <div class="homeShelf homeLeftShelf">
+      <div class="homeShelfRow"><i class="hb red"></i><i class="hb gold"></i><i class="hb green"></i><i class="hb blue"></i><i class="hb brown"></i><i class="hb purple"></i></div>
+      <div class="homeShelfRow"><i class="hb green"></i><i class="hb red"></i><i class="hb gold"></i><i class="hb brown"></i><i class="hb blue"></i><i class="hb red"></i></div>
+      <div class="homeShelfRow"><i class="hb blue"></i><i class="hb brown"></i><i class="hb purple"></i><i class="hb gold"></i><i class="hb green"></i><i class="hb red"></i></div>
+      <div class="homeShelfRow"><i class="hb gold"></i><i class="hb green"></i><i class="hb red"></i><i class="hb blue"></i><i class="hb brown"></i><i class="hb purple"></i></div>
+    </div>
+
+    <div class="homeShelf homeRightShelf">
+      <div class="homeShelfRow"><i class="hb gold"></i><i class="hb brown"></i><i class="hb blue"></i><i class="hb red"></i><i class="hb green"></i><i class="hb purple"></i></div>
+      <div class="homeShelfRow"><i class="hb red"></i><i class="hb gold"></i><i class="hb green"></i><i class="hb brown"></i><i class="hb purple"></i><i class="hb blue"></i></div>
+      <div class="homeShelfRow"><i class="hb purple"></i><i class="hb blue"></i><i class="hb red"></i><i class="hb gold"></i><i class="hb brown"></i><i class="hb green"></i></div>
+      <div class="homeShelfRow"><i class="hb brown"></i><i class="hb red"></i><i class="hb gold"></i><i class="hb green"></i><i class="hb blue"></i><i class="hb purple"></i></div>
+    </div>
+
+    <div class="homeLamp">
+      <div class="homeLampWire"></div>
+      <div class="homeLampShade"><div class="homeBulb"></div></div>
+      <div class="homeLampLight"></div>
+    </div>
+
+    <div class="homeDesk"></div>
+    <div class="homePaper hp1"></div><div class="homePaper hp2"></div><div class="homePaper hp3"></div><div class="homePaper hp4"></div>
+
+    <div class="homeBookScene">
+      <div class="homeBookShadow"></div>
+      <div class="homeOpenBook">
+        <div class="homePage homeLeftPage">
+          <div class="homePageContent">
+            <div class="homePageSmall">SAHIL EBOOK STUDIO</div>
+            <h2>Knowledge<br>That Stays.</h2>
+            <p>Practical digital guides crafted for creators, learners and builders.</p>
+          </div>
+        </div>
+        <div class="homePage homeRightPage">
+          <div class="homePageContent">
+            <div class="homePageSmall">EXPLORE</div>
+            <h2>Read.<br>Learn.<br>Create.</h2>
+            <p>AI • Programming • Business<br>Mindset • Digital Skills</p>
+          </div>
+        </div>
+        <div class="homeFlipPage"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homeHeroContent">
+    <div class="homeSmallTitle">✦ A DIGITAL LIBRARY FOR CREATORS</div>
+    <h1>Stories Fade.<br><span>Knowledge Endures.</span></h1>
+    <p>Premium eBooks designed to turn ideas into skills, skills into action, and action into growth.</p>
+    <a href="#ebooks" class="homeExplore">EXPLORE THE LIBRARY &nbsp; →</a>
+  </div>
+</section>
+
+
+
+<section class="section" id="ebooks">
+
+<div class="heading">
+<div class="kicker">OUR COLLECTION</div>
+<h2>Premium eBooks</h2>
+<p>
+Search karo, details dekho aur apni pasand ki eBook purchase karo.
+</p>
+</div>
+
+<div class="filters">
+
+<input
+id="search"
+class="search"
+placeholder="Search eBooks..."
+oninput="renderBooks()">
+
+<button class="filter active" onclick="filterBooks('All',this)">All</button>
+<button class="filter" onclick="filterBooks('AI',this)">AI</button>
+<button class="filter" onclick="filterBooks('Programming',this)">Programming</button>
+<button class="filter" onclick="filterBooks('Business',this)">Business</button>
+<button class="filter" onclick="filterBooks('Motivation',this)">Motivation</button>
+
+</div>
+
+<div class="bookGrid" id="bookGrid"></div>
+
+</section>
+
+
+<section class="section" id="about">
+
+<div class="heading">
+<div class="kicker">WHY US</div>
+<h2>Everything You Need</h2>
+</div>
+
+<div class="featureGrid">
+
+<div class="feature">
+<i>⚡</i>
+<h3>Fast Delivery</h3>
+<p>Approved payment ke baad dashboard se eBook access.</p>
+</div>
+
+<div class="feature">
+<i>📱</i>
+<h3>Mobile Friendly</h3>
+<p>Phone, tablet aur computer par easily read karo.</p>
+</div>
+
+<div class="feature">
+<i>🔐</i>
+<h3>Order Tracking</h3>
+<p>Dashboard me payment verification status check karo.</p>
+</div>
+
+<div class="feature">
+<i>💬</i>
+<h3>Support</h3>
+<p>Order ya payment related query directly submit karo.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="support">
+
+<div class="heading">
+<div class="kicker">CUSTOMER SUPPORT</div>
+<h2>Need Help?</h2>
+</div>
+
+<div class="support">
+
+<div class="box">
+<h2>Sahil eBook Studio</h2>
+<p style="color:#9098b0;line-height:1.8;margin-top:10px">
+Order, payment ya eBook se related koi issue ho to support form
+submit karein.
+</p>
+<p id="supportDisplay" style="margin-top:20px">
+Support Email: Not configured
+</p>
+</div>
+
+<form class="box" onsubmit="submitSupport(event)">
+
+<input id="sName" class="input" required placeholder="Your Name">
+<input id="sEmail" class="input" type="email" required placeholder="Your Email">
+<textarea id="sMessage" class="input" required placeholder="Your Message"></textarea>
+
+<br><br>
+
+<button class="btnMain full">
+Submit Support Request
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div>
+<strong>Sahil eBook Studio</strong>
+<p>
+Practical digital learning resources created by Sahil Singh.
+</p>
+</div>
+
+<div>
+<strong>Customer</strong>
+<p>My Dashboard</p>
+<p>My Orders</p>
+<p>Support</p>
+</div>
+
+<div>
+<strong>Legal</strong>
+<p onclick="showModal('privacyModal')" style="cursor:pointer">Privacy Policy</p>
+<p onclick="showModal('termsModal')" style="cursor:pointer">Terms & Conditions</p>
+<p onclick="showModal('refundModal')" style="cursor:pointer">Refund Policy</p>
+
+<button onclick="openAdminLogin()">
+⚙ Admin
+</button>
+</div>
+
+</footer>
+
+<!-- PRIVACY POLICY -->
+<div id="privacyModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('privacyModal')">×</button>
+
+    <h2>Privacy Policy</h2>
+
+    <p>
+      Sahil eBook Studio customer ki privacy ko respect karta hai.
+      Order, account aur support ke liye hum name, email, phone number,
+      transaction/UTR number aur optional payment proof collect kar sakte hain.
+    </p>
+
+    <p>
+      Ye information order verification, eBook delivery, customer support
+      aur account management ke liye use hoti hai.
+    </p>
+
+    <p>
+      Data Supabase jaise secure service providers par store ho sakta hai.
+      Hum customer information ko advertisers ko sell nahi karte.
+    </p>
+
+    <p>
+      Payment proof aur personal information sirf zaroorat ke according
+      access ki jaati hai.
+    </p>
+
+  </div>
+</div>
+
+
+<!-- TERMS -->
+<div id="termsModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('termsModal')">×</button>
+
+    <h2>Terms & Conditions</h2>
+
+    <p>
+      Sahil eBook Studio se purchased eBooks personal use ke liye hain.
+    </p>
+
+    <p>
+      eBook ko copy, resell, publicly upload, share ya redistribute karna
+      allowed nahi hai unless written permission di gayi ho.
+    </p>
+
+    <p>
+      Payment manually verify hone ke baad order approve kiya ja sakta hai
+      aur purchased eBook customer account me available hoti hai.
+    </p>
+
+    <p>
+      Wrong UTR, fake payment proof ya fraudulent activity par order reject
+      ya account access restrict kiya ja sakta hai.
+    </p>
+
+  </div>
+</div>
+
+
+<!-- REFUND POLICY -->
+<div id="refundModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('refundModal')">×</button>
+
+    <h2>Refund Policy</h2>
+
+    <p>
+      eBooks digital products hain. Download/access provide hone ke baad
+      normally refund nahi diya jata, subject to applicable law.
+    </p>
+
+    <p>
+      Agar duplicate payment ho, wrong product deliver ho, ya verified
+      technical problem ki wajah se purchased eBook access na ho paaye,
+      customer support se contact kar sakta hai.
+    </p>
+
+    <p>
+      Eligible refund requests payment verification ke baad review ki jayengi.
+    </p>
+
+  </div>
+</div>
+<div id="bookModal" class="modal">
+<div class="modalBox">
+<button class="close" onclick="closeModal('bookModal')">×</button>
+<div id="bookDetails"></div>
+</div>
+</div>
+
+
+<div id="checkoutModal" class="modal">
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('checkoutModal')">×</button>
+
+<h2>Complete Payment</h2>
+
+<p style="color:#9199b2;margin-top:8px">
+Google Pay, PhonePe, Paytm ya kisi bhi UPI app se payment karein.
+</p>
+
+<div class="paymentCard">
+
+<div>Amount</div>
+<div class="amount" id="payAmount">₹0</div>
+
+<div>UPI ID</div>
+<strong id="upiDisplay">Not configured</strong>
+
+<img id="qrImage" class="qr" style="display:none">
+
+<button
+id="gpayButton"
+class="btnMain full"
+style="display:none"
+onclick="openGpay()">
+Pay with Google Pay / UPI
+</button>
+
+</div>
+
+<div id="paymentWarning" class="notice">
+UPI ID abhi configure nahi hai.
+</div>
+
+<br>
+
+<input id="buyerName" class="input" placeholder="Customer Name">
+<input id="buyerEmail" class="input" type="email" placeholder="Email">
+<input id="buyerPhone" class="input" type="tel" placeholder="Phone Number">
+<input id="utr" class="input" placeholder="Transaction / UTR Number">
+
+<br><br>
+
+<button class="btnMain full" onclick="submitOrder()">
+Submit Payment
+</button>
+
+</div>
+</div>
+
+<div id="dashboardModal" class="modal customerAuthModal">
+
+  <div class="customerAurora customerAurora1"></div>
+  <div class="customerAurora customerAurora2"></div>
+  <div class="customerAurora customerAurora3"></div>
+
+  <span class="customerParticle cp1"></span>
+  <span class="customerParticle cp2"></span>
+  <span class="customerParticle cp3"></span>
+  <span class="customerParticle cp4"></span>
+  <span class="customerParticle cp5"></span>
+  <span class="customerParticle cp6"></span>
+
+  <div class="customerFloatBook cfb1">SAHIL STUDIO<span>AI</span></div>
+  <div class="customerFloatBook cfb2">EBOOK<span>PY</span></div>
+  <div class="customerFloatBook cfb3">SUCCESS<span>01</span></div>
+  <div class="customerFloatBook cfb4">BUSINESS<span>₹</span></div>
+
+  <button class="customerLoginClose" onclick="closeModal('dashboardModal')" aria-label="Close">×</button>
+
+  <div class="customerLoginScene">
+    <div class="customerLoginCard">
+
+      <div id="customerAuthBox">
+        <button id="signupTabBtn" style="display:none" aria-hidden="true"></button>
+        <button id="loginTabBtn" style="display:none" aria-hidden="true"></button>
+
+        <div class="customerBookLogo" aria-hidden="true">
+          <div class="customerLogoLeft"></div>
+          <div class="customerLogoRight"></div>
+        </div>
+
+        <div class="customerBrand">SAHIL EBOOK STUDIO</div>
+        <h1 class="customerAuthTitle">Welcome <span class="customerGradientText">Reader.</span></h1>
+        <p class="customerAuthSubtitle">Name, email, password aur phone enter karo.<br>Secure OTP verification ke baad library unlock hogi.</p>
+
+        <div id="customerAuthStatus" class="customerAuthStatus" style="display:none"></div>
+
+        <div id="customerSignupForm">
+          <div class="customerInputGroup">
+            <input id="signupName" class="customerAuthInput" type="text" autocomplete="name" placeholder="Full Name">
+            <div class="customerInputIcon">👤</div>
+          </div>
+
+          <div class="customerInputGroup">
+            <input id="signupEmail" class="customerAuthInput" type="email" autocomplete="email" placeholder="Email Address">
+            <div class="customerInputIcon">✉️</div>
+          </div>
+
+          <div class="customerInputGroup">
+            <input id="signupPassword" class="customerAuthInput" type="password" autocomplete="new-password" minlength="6" placeholder="Password (minimum 6 characters)">
+            <div class="customerInputIcon" onclick="toggleCustomerPassword()" style="cursor:pointer">👁️</div>
+          </div>
+
+          <div class="customerInputGroup">
+            <input id="signupMobile" class="customerAuthInput" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Phone Number">
+            <div class="customerInputIcon">📱</div>
+          </div>
+
+          <button class="customerPrimaryButton" style="margin-top:18px" onclick="sendCustomerSignupOtp()">SEND OTP →</button>
+
+          <div id="signupOtpArea" style="display:none;margin-top:16px">
+            <div class="customerOtpHint">6-digit OTP aapke email par bheja gaya hai.</div>
+
+            <div class="customerInputGroup">
+              <input id="signupOtp" class="customerAuthInput customerOtpInput" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter 6-digit OTP">
+              <div class="customerInputIcon">🔐</div>
+            </div>
+
+            <button class="customerPrimaryButton" style="margin-top:14px" onclick="verifyCustomerSignupOtp()">VERIFY & CONTINUE →</button>
+            <button class="customerSecondaryButton" style="margin-top:10px" onclick="sendCustomerSignupOtp()">Resend OTP</button>
+          </div>
+
+          <div class="customerSwitchText">Already have an account? <span onclick="showCustomerLogin()">Login with OTP</span></div>
+        </div>
+
+        <div id="customerLoginForm" style="display:none">
+          <div class="customerInputGroup">
+            <input id="loginEmail" class="customerAuthInput" type="email" autocomplete="email" placeholder="Email Address">
+            <div class="customerInputIcon">✉️</div>
+          </div>
+
+          <button class="customerPrimaryButton" style="margin-top:18px" onclick="sendCustomerLoginOtp()">SEND LOGIN OTP →</button>
+
+          <div id="loginOtpArea" style="display:none;margin-top:16px">
+            <div class="customerOtpHint">Login OTP aapke email par bheja gaya hai.</div>
+
+            <div class="customerInputGroup">
+              <input id="loginOtp" class="customerAuthInput customerOtpInput" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter 6-digit OTP">
+              <div class="customerInputIcon">🔐</div>
+            </div>
+
+            <button class="customerPrimaryButton" style="margin-top:14px" onclick="verifyCustomerLoginOtp()">VERIFY OTP & LOGIN →</button>
+            <button class="customerSecondaryButton" style="margin-top:10px" onclick="sendCustomerLoginOtp()">Resend OTP</button>
+          </div>
+
+          <div class="customerSwitchText">New reader? <span onclick="showCustomerSignup()">Create an account</span></div>
+        </div>
+      </div>
+
+      <div id="customerAccountBox" class="customerSuccessScreen" style="display:none">
+        <div class="customerSuccessBook">
+          <div class="customerSuccessLeft">📖</div>
+          <div class="customerSuccessRight">✨</div>
+        </div>
+        <div class="customerSuccessCheck">✓</div>
+        <h2>Welcome to Your <span class="customerGradientText">Library</span></h2>
+        <p id="customerLoggedEmail" class="customerLoggedMeta"></p>
+
+        <button class="customerPrimaryButton" style="margin-top:24px" onclick="loadDashboard()">📚 MY ORDERS & EBOOKS →</button>
+        <button class="customerSecondaryButton" style="margin-top:10px" onclick="customerLogout()">Logout</button>
+        <div id="dashboardData" class="customerDashboardData"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="adminLoginModal" class="modal">
+<div class="modalBox">
+
+<button class="close"
+onclick="closeModal('adminLoginModal')">×</button>
+
+<h2>Admin Login</h2>
+
+<p style="color:#9299b0;margin-top:8px">
+Sahil eBook Studio Admin
+</p>
+
+<input
+id="adminEmailInput"
+class="input"
+type="email"
+placeholder="Admin Email">
+
+<input
+id="adminPasswordInput"
+class="input"
+type="password"
+placeholder="Admin Password">
+
+<br><br>
+
+<button class="btnMain full"
+onclick="adminLogin()">
+Login
+</button>
+
+</div>
+</div>
+
+
+<div id="adminModal" class="modal">
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('adminModal')">×</button>
+
+<h2>Admin Dashboard</h2>
+
+<div class="tabs">
+
+<button class="tab active" onclick="adminTab('orders',this)">
+Orders
+</button>
+
+<button class="tab" onclick="adminTab('books',this)">
+eBooks
+</button>
+
+<button class="tab" onclick="adminTab('settings',this)">
+Settings
+</button>
+
+<button class="tab" onclick="adminTab('support',this)">
+Support
+</button>
+
+</div>
+
+<div id="adminContent"></div>
+
+</div>
+</div>
+
+
+<div id="cart" class="cart">
+
+<div class="cartHead">
+
+<h2>Your Cart</h2>
+
+<button class="close" onclick="toggleCart()">×</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="total">
+<span>Total</span>
+<span id="cartTotal">₹0</span>
+</div>
+
+<button class="btnMain full" onclick="checkoutCart()">
+Proceed to Payment
+</button>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://qzpbubxqujohjseiincw.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_CISE0EBakHgPejiDw2jazA_xM2ASXMV";
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* =========================
+   SAHIL EBOOK STUDIO V2
+   ========================= */
+
+function coverMarkup(book, extraStyle=''){
+  return `<div class="cover ${book.cover || 'c1'} titleOnlyCover" style="${extraStyle}"><h3>${esc(book.title)}</h3></div>`;
+}
+
+const defaultBooks = [
+
+{
+id:1,
+title:"Prompt Engineering Zero to Hero",
+category:"AI",
+price:99,
+oldPrice:199,
+rating:"★★★★★",
+cover:"c1",
+big:"AI",
+description:"ChatGPT aur AI tools ke liye basic se advanced prompt engineering.",
+learn:[
+"Prompt Engineering Basics",
+"Advanced Prompt Frameworks",
+"ChatGPT Productivity",
+"Real Prompt Examples"
+],
+download:""
+},
+
+{
+id:2,
+title:"Python Programming Complete Guide",
+category:"Programming",
+price:149,
+oldPrice:299,
+rating:"★★★★★",
+cover:"c2",
+big:"PY",
+description:"Python programming beginner se advanced level tak practical examples ke saath.",
+learn:[
+"Python Fundamentals",
+"Variables & Data Types",
+"Functions & OOP",
+"Projects & Practice"
+],
+download:""
+},
+
+{
+id:3,
+title:"Success Mindset",
+category:"Motivation",
+price:79,
+oldPrice:149,
+rating:"★★★★★",
+cover:"c3",
+big:"01",
+description:"Discipline, confidence aur growth mindset build karne ki practical guide.",
+learn:[
+"Goal Setting",
+"Daily Discipline",
+"Confidence",
+"Growth Mindset"
+],
+download:""
+},
+
+{
+id:4,
+title:"Online Earning Roadmap",
+category:"Business",
+price:129,
+oldPrice:249,
+rating:"★★★★☆",
+cover:"c4",
+big:"₹",
+description:"Beginners ke liye online earning aur digital skills ka practical roadmap.",
+learn:[
+"Skill Selection",
+"Freelancing",
+"Digital Products",
+"90 Day Roadmap"
+],
+download:""
+},
+
+{
+id:5,
+title:"Instagram Growth Playbook",
+category:"Business",
+price:99,
+oldPrice:199,
+rating:"★★★★★",
+cover:"c5",
+big:"IG",
+description:"Instagram reels, content strategy aur audience growth ki complete guide.",
+learn:[
+"Profile Optimization",
+"Reels Strategy",
+"Hooks",
+"Audience Growth"
+],
+download:""
+},
+
+{
+id:6,
+title:"Productivity Mastery",
+category:"Motivation",
+price:69,
+oldPrice:129,
+rating:"★★★★☆",
+cover:"c6",
+big:"24",
+description:"Time management, habits aur focused execution ke practical systems.",
+learn:[
+"Daily Planning",
+"Focus",
+"Habits",
+"Weekly Review"
+],
+download:""
+}
+
+];
+
+
+let books =
+JSON.parse(localStorage.getItem("sahilBooks"))
+|| defaultBooks;
+
+let cart =
+JSON.parse(localStorage.getItem("sahilCart"))
+|| [];
+
+let currentFilter="All";
+
+let checkoutBooks=[];
+
+
+
+/* =========================
+   SMALL HELPERS
+   ========================= */
+
+function esc(value){
+
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function money(value){
+
+return "₹" + Number(value || 0);
+
+}
+
+
+function showToast(message){
+
+const toast=document.getElementById("toast");
+
+toast.innerText=message;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2300);
+
+}
+
+
+function showModal(id){
+
+document
+.getElementById(id)
+.classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+}
+
+
+
+/* =========================
+   BOOK STORE
+   ========================= */
+
+function renderBooks(){
+
+const searchValue=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+const filtered=books.filter(book=>{
+
+const filterMatch=
+currentFilter==="All"
+|| book.category===currentFilter;
+
+const searchMatch=
+book.title.toLowerCase().includes(searchValue)
+|| book.category.toLowerCase().includes(searchValue);
+
+return filterMatch && searchMatch;
+
+});
+
+
+document.getElementById("bookGrid").innerHTML=
+
+filtered.map(book=>`
+
+<div class="card">
+
+${coverMarkup(book)}
+
+
+<div class="info">
+
+<span class="category">
+${esc(book.category)}
+</span>
+
+<h3>
+${esc(book.title)}
+</h3>
+
+<p class="desc">
+${esc(book.description)}
+</p>
+
+<div class="rating">
+${esc(book.rating)}
+</div>
+
+
+<div class="bottom">
+
+<div class="price">
+
+${money(book.price)}
+
+<del>
+${money(book.oldPrice)}
+</del>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="view"
+onclick="viewBook(${book.id})">
+
+View
+
+</button>
+
+
+<button
+class="buy"
+onclick="addCart(${book.id})">
+
+Buy
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+function filterBooks(category,button){
+
+currentFilter=category;
+
+document
+.querySelectorAll(".filter")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+renderBooks();
+
+}
+
+
+function viewBook(id){
+
+const book=books.find(book=>book.id===id);
+
+if(!book)return;
+
+
+document.getElementById("bookDetails").innerHTML=`
+
+${coverMarkup(book,"height:220px;margin-top:20px;")}
+
+
+<br>
+
+<div class="category">
+${esc(book.category)}
+</div>
+
+<h2 style="margin-top:7px">
+${esc(book.title)}
+</h2>
+
+<p style="
+color:#969eb7;
+line-height:1.7;
+margin-top:10px
+">
+
+${esc(book.description)}
+
+</p>
+
+
+<h3 style="margin-top:20px">
+What You'll Learn
+</h3>
+
+<ul style="
+padding-left:20px;
+margin:10px 0 20px;
+line-height:1.9;
+color:#bcc1d2
+">
+
+${book.learn.map(item=>
+`<li>${esc(item)}</li>`
+).join("")}
+
+</ul>
+
+
+<div class="price">
+${money(book.price)}
+
+<del>
+${money(book.oldPrice)}
+</del>
+</div>
+
+<br>
+
+<button
+class="btnMain full"
+onclick="buyNow(${book.id})">
+
+Buy Now
+
+</button>
+
+`;
+
+showModal("bookModal");
+
+}
+
+
+
+/* =========================
+   CART
+   ========================= */
+
+function addCart(id){
+
+const book=books.find(book=>book.id===id);
+
+if(!book)return;
+
+
+if(cart.some(item=>item.id===id)){
+
+showToast("Already in cart");
+
+return;
+
+}
+
+cart.push(book);
+
+saveCart();
+
+showToast("Added to cart 🛒");
+
+}
+
+
+function removeCart(id){
+
+cart=cart.filter(item=>item.id!==id);
+
+saveCart();
+
+}
+
+
+function saveCart(){
+
+localStorage.setItem(
+"sahilCart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+}
+
+
+function updateCart(){
+
+const cartCountEl=document.getElementById("cartCount");
+if(cartCountEl) cartCountEl.innerText=cart.length;
+
+
+const area=document.getElementById("cartItems");
+
+
+if(cart.length===0){
+
+area.innerHTML=`
+
+<p style="
+color:#8991aa;
+margin-top:25px
+">
+
+Your cart is empty.
+
+</p>
+
+`;
+
+}else{
+
+area.innerHTML=cart.map(book=>`
+
+<div class="cartItem">
+
+<div>
+
+<strong>
+${esc(book.title)}
+</strong>
+
+<p style="
+font-size:12px;
+color:#9299af;
+margin-top:5px
+">
+
+${money(book.price)}
+
+</p>
+
+</div>
+
+
+<button
+class="remove"
+onclick="removeCart(${book.id})">
+
+Remove
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+document.getElementById("cartTotal").innerText=
+
+money(
+cart.reduce(
+(sum,item)=>sum+Number(item.price),
+0
+)
+);
+
+}
+
+
+function toggleCart(){
+
+document
+.getElementById("cart")
+.classList.toggle("open");
+
+}
+
+
+function buyNow(id){
+
+const book=books.find(book=>book.id===id);
+
+checkoutBooks=[book];
+
+closeModal("bookModal");
+
+prepareCheckout();
+
+}
+
+
+function checkoutCart(){
+
+if(cart.length===0){
+
+showToast("Cart is empty");
+
+return;
+
+}
+
+checkoutBooks=[...cart];
+
+toggleCart();
+
+prepareCheckout();
+
+}
+
+
+
+/* =========================
+   PAYMENT / GOOGLE PAY
+   ========================= */
+
+function getCheckoutTotal(){
+
+return checkoutBooks.reduce(
+(sum,item)=>sum+Number(item.price),
+0
+);
+
+}
+
+
+function createUpiLink(upi){
+
+if(!upi)return "";
+
+const amount=getCheckoutTotal();
+
+const orderNote=
+"Sahil eBook Studio Order";
+
+
+return (
+"upi://pay"
++"?pa="+encodeURIComponent(upi)
++"&pn="+encodeURIComponent("Sahil eBook Studio")
++"&am="+encodeURIComponent(amount)
++"&cu=INR"
++"&tn="+encodeURIComponent(orderNote)
+);
+
+}
+
+
+async function prepareCheckout(){
+
+const amount=getCheckoutTotal();
+
+document.getElementById("payAmount").innerText=
+money(amount);
+
+
+const { data: settings, error } = await db
+  .from("store_settings")
+  .select("upi_id")
+  .limit(1)
+  .maybeSingle();
+
+if(error){
+  console.log(error);
+  showToast("Payment settings load nahi hui");
+  return;
+}
+
+const upi = settings?.upi_id || "";
+window.currentStoreUpi = upi;
+const display=
+document.getElementById("upiDisplay");
+
+const qr=
+document.getElementById("qrImage");
+
+const payButton=
+document.getElementById("gpayButton");
+
+const warning=
+document.getElementById("paymentWarning");
+
+
+if(upi){
+
+display.innerText=upi;
+
+const upiLink=createUpiLink(upi);
+
+qr.src=
+"https://api.qrserver.com/v1/create-qr-code/"
++"?size=220x220&data="
++encodeURIComponent(upiLink);
+
+qr.style.display="block";
+
+payButton.style.display="block";
+
+warning.innerHTML=
+"✅ UPI ID configured. Payment ke baad UTR number submit karein.";
+
+}else{
+
+display.innerText="Not configured";
+
+qr.style.display="none";
+
+payButton.style.display="none";
+
+warning.innerHTML=
+"⚠️ Live UPI ID configure nahi hai. Real payment mat karein.";
+
+}
+
+
+showModal("checkoutModal");
+
+}
+
+
+function openGpay(){
+
+const link=createUpiLink(window.currentStoreUpi);
+
+if(!link){
+
+showToast("UPI ID not configured");
+
+return;
+
+}
+
+window.location.href=link;
+
+}
+
+
+
+/* =========================
+   PAYMENT PROOF
+   ========================= */
+
+function addProofInput(){
+
+const utr=document.getElementById("utr");
+
+if(document.getElementById("paymentProof"))
+return;
+
+
+utr.insertAdjacentHTML(
+"afterend",
+`
+
+<div style="margin-top:13px">
+
+<label
+style="
+font-size:12px;
+color:#a9b0c4
+">
+
+Payment Screenshot (Optional)
+
+</label>
+
+<input
+id="paymentProof"
+class="input"
+type="file"
+accept="image/*">
+
+</div>
+
+`
+);
+
+}
+
+
+function fileToDataURL(file){
+
+return new Promise((resolve,reject)=>{
+
+const reader=new FileReader();
+
+reader.onload=()=>resolve(reader.result);
+
+reader.onerror=reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+
+/* =========================
+   SUBMIT ORDER
+   ========================= */
+
+async function submitOrder(){
+
+const upi = window.currentStoreUpi || "";
+
+
+if(!upi){
+
+showToast("First configure UPI ID");
+
+return;
+
+}
+
+
+const name=
+document.getElementById("buyerName")
+.value.trim();
+
+const email=
+document.getElementById("buyerEmail")
+.value.trim()
+.toLowerCase();
+
+const phone=
+document.getElementById("buyerPhone")
+.value.trim();
+
+const utr=
+document.getElementById("utr")
+.value.trim();
+
+
+if(!name){
+
+showToast("Enter customer name");
+
+return;
+
+}
+
+
+if(!email || !email.includes("@")){
+
+showToast("Enter valid email");
+
+return;
+
+}
+
+
+if(!phone){
+
+showToast("Enter phone number");
+
+return;
+
+}
+
+
+if(!utr){
+
+showToast("Enter UTR number");
+
+return;
+
+}
+
+
+let proof="";
+
+const fileInput=
+document.getElementById("paymentProof");
+
+
+if(
+fileInput
+&& fileInput.files
+&& fileInput.files[0]
+){
+
+const file=fileInput.files[0];
+
+
+if(file.size > 650000){
+
+showToast("Screenshot 650KB se chhota rakho");
+
+return;
+
+}
+
+
+try{
+
+proof=await fileToDataURL(file);
+
+}catch(error){
+
+proof="";
+
+}
+
+}
+
+/* ===== SAVE ORDER TO SUPABASE ===== */
+
+const onlineOrderId = crypto.randomUUID();
+
+const onlineOrderCode =
+"SES" + Date.now().toString().slice(-8);
+
+const onlineTotal = checkoutBooks.reduce(
+  (sum, item) => sum + Number(item.price),
+  0
+);
+
+const { data: userData, error: userError } =
+await db.auth.getUser();
+
+const loggedUser = userData?.user;
+
+if(userError || !loggedUser){
+
+  showToast("Pehle customer account me login karo");
+
+  return;
+}
+
+if(
+  email.toLowerCase() !==
+  loggedUser.email.toLowerCase()
+)
+
+{
+
+  showToast("Checkout me wahi email dalo jisse login kiya hai");
+
+  return;
+}
+/* CREATE ORDER */
+
+const { error: orderError } = await db
+  .from("orders")
+  .insert({
+    id: onlineOrderId,
+    user_id: loggedUser.id,
+    order_code: onlineOrderCode,
+    customer_name: name,
+    email: email,
+    phone: phone,
+    total_amount: onlineTotal,
+    status: "pending"
+  });
+
+
+if(orderError){
+
+  console.log(orderError);
+
+  showToast("Online order save error");
+
+  return;
+}
+
+
+/* CREATE ORDER ITEMS */
+
+const onlineItems = checkoutBooks.map(book => ({
+  order_id: onlineOrderId,
+  ebook_id: book.dbId || null,
+  title_snapshot: book.title,
+  price_snapshot: Number(book.price)
+}));
+
+
+const { error: itemError } = await db
+  .from("order_items")
+  .insert(onlineItems);
+
+
+if(itemError){
+
+  console.log(itemError);
+
+  showToast("Order items save error");
+
+  return;
+}
+
+
+
+let proofPath = null;
+
+const proofFile =
+  document.getElementById("paymentProof")?.files?.[0];
+
+if(proofFile){
+
+  const ext =
+    proofFile.name.split(".").pop() || "jpg";
+
+  proofPath =
+    `${loggedUser.id}/${onlineOrderId}-${Date.now()}.${ext}`;
+
+  const { error: uploadError } = await db.storage
+    .from("payment-proofs")
+    .upload(proofPath, proofFile);
+
+  if(uploadError){
+    console.log(uploadError);
+    showToast("Payment screenshot upload nahi hui");
+    return;
+  }
+}
+
+/* SAVE UTR / PAYMENT */
+
+/* SAVE UTR / PAYMENT */
+
+const { error: paymentError } = await db
+  .from("payment_submissions")
+  .insert({
+    order_id: onlineOrderId,
+    utr: utr,
+    proof_url: proofPath,
+    status: "pending"
+  });
+
+
+if(paymentError){
+
+  console.log(paymentError);
+
+  showToast("Payment details save error");
+
+  return;
+}
+
+
+showToast("Online order saved ✅");
+
+
+cart=[];
+
+saveCart();
+
+checkoutBooks=[];
+
+
+document.getElementById("buyerName").value="";
+document.getElementById("buyerEmail").value="";
+document.getElementById("buyerPhone").value="";
+document.getElementById("utr").value="";
+
+
+if(fileInput)
+fileInput.value="";
+
+
+closeModal("checkoutModal");
+
+showToast("Order submitted ✅");
+
+}
+
+
+
+/* =========================
+   CUSTOMER DASHBOARD - EMAIL OTP
+   ========================= */
+
+let pendingCustomerAuth = (() => {
+  try{
+    return JSON.parse(sessionStorage.getItem("pendingCustomerAuth") || "null");
+  }catch(e){
+    return null;
+  }
+})();
+
+let pendingSignupPassword = "";
+
+function toggleCustomerPassword(){
+  const input = document.getElementById("signupPassword");
+  if(!input) return;
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function savePendingCustomerAuth(data){
+  pendingCustomerAuth = data;
+  if(data){
+    sessionStorage.setItem("pendingCustomerAuth", JSON.stringify(data));
+  }else{
+    sessionStorage.removeItem("pendingCustomerAuth");
+  }
+}
+
+function setCustomerAuthStatus(message, type="info"){
+  const box = document.getElementById("customerAuthStatus");
+  if(!box) return;
+
+  if(!message){
+    box.style.display = "none";
+    box.innerText = "";
+    return;
+  }
+
+  box.style.display = "block";
+  box.innerText = message;
+
+  if(type === "success"){
+    box.style.background = "rgba(46,204,113,.12)";
+    box.style.border = "1px solid rgba(46,204,113,.35)";
+    box.style.color = "#8ff0b7";
+  }else if(type === "error"){
+    box.style.background = "rgba(255,91,122,.12)";
+    box.style.border = "1px solid rgba(255,91,122,.35)";
+    box.style.color = "#ff9aad";
+  }else{
+    box.style.background = "rgba(126,94,255,.12)";
+    box.style.border = "1px solid rgba(126,94,255,.30)";
+    box.style.color = "#c7bcff";
+  }
+}
+
+function showCustomerSignup(){
+  document.getElementById("customerSignupForm").style.display = "block";
+  document.getElementById("customerLoginForm").style.display = "none";
+  document.getElementById("signupTabBtn").className = "btnMain";
+  document.getElementById("loginTabBtn").className = "btnDark";
+  setCustomerAuthStatus("");
+}
+
+function showCustomerLogin(){
+  document.getElementById("customerSignupForm").style.display = "none";
+  document.getElementById("customerLoginForm").style.display = "block";
+  document.getElementById("signupTabBtn").className = "btnDark";
+  document.getElementById("loginTabBtn").className = "btnMain";
+  setCustomerAuthStatus("");
+}
+
+async function openDashboard(){
+  showModal("dashboardModal");
+
+  const { data } = await db.auth.getSession();
+  const user = data.session?.user || null;
+  setCustomerUI(user);
+
+  if(!user && pendingCustomerAuth?.mode === "signup"){
+    showCustomerSignup();
+    document.getElementById("signupOtpArea").style.display = "block";
+    if(pendingCustomerAuth.name) document.getElementById("signupName").value = pendingCustomerAuth.name;
+    if(pendingCustomerAuth.email) document.getElementById("signupEmail").value = pendingCustomerAuth.email;
+    if(pendingCustomerAuth.mobile) document.getElementById("signupMobile").value = pendingCustomerAuth.mobile;
+  }else if(!user && pendingCustomerAuth?.mode === "login"){
+    showCustomerLogin();
+    document.getElementById("loginOtpArea").style.display = "block";
+    if(pendingCustomerAuth.email) document.getElementById("loginEmail").value = pendingCustomerAuth.email;
+  }else if(!user){
+    showCustomerSignup();
+  }
+}
+
+function updateCustomerNav(user){
+  const btn = document.getElementById("homeAccountBtn");
+  if(!btn) return;
+  btn.textContent = user ? "My Library" : "Login";
+  btn.setAttribute("aria-label", user ? "Open My Library" : "Login to your account");
+}
+
+function setCustomerUI(user){
+  updateCustomerNav(user);
+  const authBox = document.getElementById("customerAuthBox");
+  const accountBox = document.getElementById("customerAccountBox");
+  const emailText = document.getElementById("customerLoggedEmail");
+
+  if(user){
+    authBox.style.display = "none";
+    accountBox.style.display = "block";
+
+    const displayName = user.user_metadata?.full_name || "Customer";
+    const mobile = user.user_metadata?.mobile || "";
+    emailText.innerText = displayName + " • " + user.email + (mobile ? " • " + mobile : "");
+  }else{
+    authBox.style.display = "block";
+    accountBox.style.display = "none";
+    emailText.innerText = "";
+  }
+}
+
+async function sendCustomerSignupOtp(){
+  const name = document.getElementById("signupName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim().toLowerCase();
+  const password = document.getElementById("signupPassword").value;
+  const mobile = document.getElementById("signupMobile").value.trim();
+  const cleanMobile = mobile.replace(/\D/g, "");
+
+  if(name.length < 2){
+    setCustomerAuthStatus("Apna full name enter karo", "error");
+    return;
+  }
+
+  if(!email || !email.includes("@")){
+    setCustomerAuthStatus("Valid email address enter karo", "error");
+    return;
+  }
+
+  if(password.length < 6){
+    setCustomerAuthStatus("Password minimum 6 characters ka rakho", "error");
+    return;
+  }
+
+  if(cleanMobile.length < 10 || cleanMobile.length > 15){
+    setCustomerAuthStatus("Valid phone number enter karo", "error");
+    return;
+  }
+
+  setCustomerAuthStatus("OTP send ho raha hai...", "info");
+
+  const { error } = await db.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: true,
+      emailRedirectTo: window.location.origin + window.location.pathname
+    }
+  });
+
+  if(error){
+    console.log(error);
+    const msg = (error.message || "").toLowerCase();
+    if(msg.includes("rate") || msg.includes("security purposes")){
+      setCustomerAuthStatus("OTP abhi-abhi bheja gaya tha. Thodi der baad Resend karein.", "error");
+    }else{
+      setCustomerAuthStatus(error.message || "OTP send nahi hua", "error");
+    }
+    return;
+  }
+
+  pendingSignupPassword = password;
+  savePendingCustomerAuth({mode:"signup", name, email, mobile});
+  document.getElementById("signupOtpArea").style.display = "block";
+  document.getElementById("signupOtp").focus();
+  setCustomerAuthStatus("OTP email par bhej diya ✅", "success");
+}
+
+async function verifyCustomerSignupOtp(){
+  const pending = pendingCustomerAuth;
+  const token = document.getElementById("signupOtp").value.trim();
+
+  if(!pending || pending.mode !== "signup"){
+    setCustomerAuthStatus("Pehle Name, Email aur Phone fill karke Send OTP dabao", "error");
+    return;
+  }
+
+  if(!/^\d{6}$/.test(token)){
+    setCustomerAuthStatus("6-digit OTP enter karo", "error");
+    return;
+  }
+
+  setCustomerAuthStatus("OTP verify ho raha hai...", "info");
+
+  const { data, error } = await db.auth.verifyOtp({
+    email: pending.email,
+    token,
+    type: "email"
+  });
+
+  if(error){
+    console.log(error);
+    setCustomerAuthStatus("OTP galat ya expire ho gaya. Dobara try karo.", "error");
+    return;
+  }
+
+  const accountUpdate = {
+    data: {
+      full_name: pending.name,
+      mobile: pending.mobile
+    }
+  };
+  if(pendingSignupPassword.length >= 6){
+    accountUpdate.password = pendingSignupPassword;
+  }
+
+  const { data: updated, error: metaError } = await db.auth.updateUser(accountUpdate);
+
+  if(metaError){
+    console.log(metaError);
+  }
+
+  const user = updated?.user || data?.user || data?.session?.user || null;
+  savePendingCustomerAuth(null);
+  pendingSignupPassword = "";
+  document.getElementById("signupPassword").value = "";
+  document.getElementById("signupOtp").value = "";
+  document.getElementById("signupOtpArea").style.display = "none";
+
+  setCustomerUI(user);
+  showToast("Account created & logged in ✅");
+}
+
+async function sendCustomerLoginOtp(){
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+
+  if(!email || !email.includes("@")){
+    setCustomerAuthStatus("Valid email address enter karo", "error");
+    return;
+  }
+
+  setCustomerAuthStatus("Login OTP send ho raha hai...", "info");
+
+  const { error } = await db.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: false,
+      emailRedirectTo: window.location.origin + window.location.pathname
+    }
+  });
+
+  if(error){
+    console.log(error);
+    const msg = (error.message || "").toLowerCase();
+    if(msg.includes("rate") || msg.includes("security purposes")){
+      setCustomerAuthStatus("OTP abhi-abhi bheja gaya tha. Thodi der baad Resend karein.", "error");
+    }else{
+      setCustomerAuthStatus("Account nahi mila ya OTP send nahi hua. Create Account try karo.", "error");
+    }
+    return;
+  }
+
+  savePendingCustomerAuth({mode:"login", email});
+  document.getElementById("loginOtpArea").style.display = "block";
+  document.getElementById("loginOtp").focus();
+  setCustomerAuthStatus("Login OTP email par bhej diya ✅", "success");
+}
+
+async function verifyCustomerLoginOtp(){
+  const pending = pendingCustomerAuth;
+  const token = document.getElementById("loginOtp").value.trim();
+
+  if(!pending || pending.mode !== "login"){
+    setCustomerAuthStatus("Pehle Email enter karke Send Login OTP dabao", "error");
+    return;
+  }
+
+  if(!/^\d{6}$/.test(token)){
+    setCustomerAuthStatus("6-digit OTP enter karo", "error");
+    return;
+  }
+
+  setCustomerAuthStatus("OTP verify ho raha hai...", "info");
+
+  const { data, error } = await db.auth.verifyOtp({
+    email: pending.email,
+    token,
+    type: "email"
+  });
+
+  if(error){
+    console.log(error);
+    setCustomerAuthStatus("OTP galat ya expire ho gaya. Dobara try karo.", "error");
+    return;
+  }
+
+  savePendingCustomerAuth(null);
+  document.getElementById("loginOtp").value = "";
+  document.getElementById("loginOtpArea").style.display = "none";
+  setCustomerUI(data?.user || data?.session?.user || null);
+  showToast("Login successful ✅");
+}
+
+async function customerLogout(){
+  await db.auth.signOut();
+  savePendingCustomerAuth(null);
+  pendingSignupPassword = "";
+  setCustomerUI(null);
+  document.getElementById("dashboardData").innerHTML = "";
+  showCustomerSignup();
+  showToast("Logged out");
+}
+
+async function loadDashboard(){
+
+  const box =
+    document.getElementById("dashboardData");
+
+  box.innerHTML = `
+    <div class="order">
+      Loading your eBooks...
+    </div>
+  `;
+
+
+  const { data: userData, error: userError } =
+    await db.auth.getUser();
+
+  const user = userData?.user;
+
+
+  if(userError || !user){
+
+    box.innerHTML = `
+      <div class="order">
+        Please login first.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const { data: orders, error } = await db
+    .from("orders")
+    .select(`
+      id,
+      order_code,
+      total_amount,
+      status,
+      created_at,
+      order_items (
+        ebook_id,
+        title_snapshot,
+        price_snapshot,
+        ebooks (
+          title,
+          file_url
+        )
+      )
+    `)
+    .order("created_at", { ascending:false });
+
+
+  if(error){
+
+    console.log(error);
+
+    box.innerHTML = `
+      <div class="order">
+        Orders load nahi ho paaye.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if(!orders || orders.length === 0){
+
+    box.innerHTML = `
+      <div class="order">
+        Abhi koi purchased eBook nahi hai.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  let finalHTML = "";
+
+
+  for(const order of orders){
+
+    let statusClass = "pending";
+    let statusText = "Payment Verification Pending";
+
+    if(order.status === "approved"){
+      statusClass = "approved";
+      statusText = "Payment Approved";
+    }
+
+    if(order.status === "rejected"){
+      statusClass = "rejected";
+      statusText = "Payment Rejected";
+    }
+
+
+    let downloadHTML = "";
+
+
+    if(order.status === "approved"){
+
+      for(const item of (order.order_items || [])){
+
+        const ebook = item.ebooks;
+
+        if(ebook && ebook.file_url){
+
+          const { data: signedData, error: signedError } =
+            await db.storage
+            .from("ebooks")
+            .createSignedUrl(
+              ebook.file_url,
+              300
+            );
+
+
+          if(!signedError && signedData?.signedUrl){
+
+            downloadHTML += `
+              <a
+                href="${signedData.signedUrl}"
+                target="_blank"
+                class="btnMain"
+                style="
+                  display:block;
+                  text-align:center;
+                  margin-top:12px;
+                "
+              >
+                ⬇ Download ${esc(
+                  ebook.title || item.title_snapshot
+                )}
+              </a>
+            `;
+
+          }
+
+        }
+
+      }
+
+    }
+
+
+    finalHTML += `
+      <div class="order">
+
+        <strong>
+          ${esc(order.order_code)}
+        </strong>
+
+        <p style="margin-top:8px">
+          ${order.order_items
+            .map(item => esc(item.title_snapshot))
+            .join(", ")}
+        </p>
+
+        <p>
+          Amount: ₹${Number(order.total_amount)}
+        </p>
+
+        <p>
+          Status:
+          <strong class="${statusClass}">
+            ${statusText}
+          </strong>
+        </p>
+
+        <p
+          style="
+            font-size:11px;
+            color:#80889f;
+            margin-top:5px
+          "
+        >
+          ${new Date(order.created_at).toLocaleString()}
+        </p>
+
+        ${downloadHTML}
+
+      </div>
+    `;
+
+  }
+
+
+  box.innerHTML = finalHTML;
+
+}
+
+/* =========================
+   SUPPORT
+   ========================= */
+
+async function submitSupport(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("sName")
+    .value.trim();
+
+  const email =
+    document.getElementById("sEmail")
+    .value.trim()
+    .toLowerCase();
+
+  const message =
+    document.getElementById("sMessage")
+    .value.trim();
+
+  if(!name || !email || !message){
+
+    showToast("Sabhi fields fill karo");
+
+    return;
+  }
+
+  showToast("Support request sending...");
+
+  const { error } = await db
+    .from("support_tickets")
+    .insert({
+      name: name,
+      email: email,
+      message: message,
+      status: "open"
+    });
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Support request send nahi hui");
+
+    return;
+  }
+
+  event.target.reset();
+
+  showToast("Support request sent ✅");
+
+}
+
+/* =========================
+   ADMIN LOGIN
+   ========================= */
+
+function openAdminLogin(){
+
+  document.getElementById("adminEmailInput").value="";
+  document.getElementById("adminPasswordInput").value="";
+
+  showModal("adminLoginModal");
+}
+
+
+async function adminLogin(){
+
+  const email =
+  document.getElementById("adminEmailInput")
+  .value.trim();
+
+  const password =
+  document.getElementById("adminPasswordInput")
+  .value;
+
+  if(!email || !password){
+
+    showToast("Email aur password enter karo");
+
+    return;
+  }
+
+  showToast("Admin login checking...");
+
+  const { data, error } =
+  await db.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Wrong email or password");
+
+    return;
+  }
+
+  const { data: isAdmin, error: adminError } =
+  await db.rpc("is_admin");
+
+  if(adminError || !isAdmin){
+
+    await db.auth.signOut();
+
+    showToast("Admin access denied");
+
+    return;
+  }
+
+  closeModal("adminLoginModal");
+
+  showModal("adminModal");
+
+  renderAdminOrders();
+
+  showToast("Admin login successful ✅");
+}
+
+/* =========================
+   ADMIN TABS
+   ========================= */
+
+function adminTab(tab,button){
+
+document
+.querySelectorAll(".tab")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+
+if(tab==="orders")
+renderAdminOrders();
+
+
+if(tab==="books")
+renderAdminBooks();
+
+
+if(tab==="settings")
+renderAdminSettings();
+
+
+if(tab==="support")
+renderAdminSupport();
+
+}
+
+
+
+/* =========================
+   ADMIN ORDERS
+   ========================= */
+
+async function renderAdminOrders(){
+
+const { data, error } = await db
+  .from("orders")
+  .select(`
+    id,
+    order_code,
+    customer_name,
+    email,
+    phone,
+    total_amount,
+    status,
+    created_at,
+    payment_submissions (
+      utr,
+      proof_url,
+      status
+    )
+  `)
+  .order("created_at", { ascending:false });
+
+if(error){
+
+  console.log(error);
+
+  showToast("Online orders load error");
+
+  return;
+}
+
+const orders = (data || []).map(row => ({
+
+  id: row.order_code || row.id,
+
+  dbId: row.id,
+
+  customerName: row.customer_name,
+
+  email: row.email,
+
+  phone: row.phone,
+
+  amount: Number(row.total_amount),
+
+  utr:
+  row.payment_submissions?.[0]?.utr || "",
+  
+  proofUrl:
+row.payment_submissions?.[0]?.proof_url || "",
+
+  proof:
+  row.payment_submissions?.[0]?.proof_url || "",
+
+  status: row.status,
+
+  date: row.created_at
+
+}));
+
+const area=
+document.getElementById("adminContent");
+
+
+if(orders.length===0){
+
+area.innerHTML=`
+
+<div class="order">
+
+No orders yet.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+area.innerHTML=
+
+orders.map(order=>`
+
+<div class="order">
+
+<strong>
+${esc(order.id)}
+</strong>
+
+<p style="margin-top:6px">
+
+Customer:
+${esc(order.customerName)}
+
+</p>
+
+<p>
+Email:
+${esc(order.email)}
+</p>
+
+<p>
+Phone:
+${esc(order.phone)}
+</p>
+
+<p>
+Amount:
+${money(order.amount)}
+</p>
+
+<p>
+UTR:
+${esc(order.utr)}
+</p>
+
+<p>
+
+Status:
+<strong class="${order.status}">
+${esc(order.status.toUpperCase())}
+</strong>
+
+</p>
+
+
+${order.proof
+?
+`
+
+<img
+src="${order.proof}"
+style="
+width:100%;
+max-width:230px;
+margin-top:10px;
+border-radius:10px
+">
+
+`
+:
+""
+}
+
+
+<div class="adminButtons">
+
+<button
+class="approveBtn"
+onclick="changeOrderStatus('${order.id}','approved')">
+
+Approve
+
+</button>
+
+
+<button
+class="rejectBtn"
+onclick="changeOrderStatus('${order.id}','rejected')">
+
+Reject
+
+</button>
+
+${order.proofUrl ? `
+<button
+class="approveBtn"
+onclick="viewPaymentProof('${order.proofUrl}')">
+View Payment Proof
+</button>
+` : ""}
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+async function viewPaymentProof(path){
+
+  if(!path){
+    showToast("Payment proof nahi mila");
+    return;
+  }
+
+  const { data, error } = await db.storage
+    .from("payment-proofs")
+    .createSignedUrl(path, 300);
+
+  if(error || !data?.signedUrl){
+    console.log(error);
+    showToast("Payment proof open nahi hua");
+    return;
+  }
+
+  window.open(data.signedUrl, "_blank");
+}
+
+async function changeOrderStatus(orderCode, status){
+
+  showToast("Updating order...");
+
+  const { data: updatedOrder, error } = await db
+    .from("orders")
+    .update({
+      status: status
+    })
+    .eq("order_code", orderCode)
+    .select("id")
+    .single();
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Order update error");
+
+    return;
+  }
+
+  const { error: paymentError } = await db
+    .from("payment_submissions")
+    .update({
+      status: status
+    })
+    .eq("order_id", updatedOrder.id);
+
+  if(paymentError){
+    console.log(paymentError);
+  }
+
+  await renderAdminOrders();
+
+  if(status === "approved"){
+    showToast("Payment approved ✅");
+  }else{
+    showToast("Payment rejected");
+  }
+
+}
+
+
+/* =========================
+   ADMIN BOOKS
+   ========================= */
+
+async function renderAdminBooks(){
+const { data, error } = await db
+  .from("ebooks")
+  .select("*")
+  .order("created_at", { ascending:false });
+
+if(error){
+  console.log(error);
+  showToast("eBooks load nahi hui");
+  return;
+}
+
+books = (data || []).map(row => ({
+  id: row.id,
+  dbId: row.id,
+  title: row.title,
+  category: row.category,
+  price: Number(row.price),
+  oldPrice: Number(row.old_price || 0),
+  description: row.description || "",
+  cover: row.cover_class || "c1",
+  badge: row.cover_text || "BOOK",
+  download: row.file_url || ""
+}));
+const area=
+document.getElementById("adminContent");
+
+
+area.innerHTML=`
+
+<button
+class="btnMain full"
+onclick="addNewBook()">
+
++ Add New eBook
+
+</button>
+
+<br><br>
+
+${books.map(book=>`
+
+<div class="adminBook">
+
+<strong>
+${esc(book.title)}
+</strong>
+
+<p style="
+color:#929ab2;
+font-size:12px;
+margin-top:4px
+">
+
+${esc(book.category)}
+• ${money(book.price)}
+
+</p>
+
+<p style="
+font-size:11px;
+color:#737c95;
+margin-top:5px
+">
+
+Download:
+${book.download
+? "Configured ✅"
+: "Not configured"}
+
+</p>
+
+
+<div class="adminButtons">
+
+<button
+style="background:#525bd1"
+onclick="editBook('${book.id}')">
+
+Edit
+
+</button>
+
+<button
+class="rejectBtn"
+onclick="deleteBook('${book.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("")}
+
+`;
+
+}
+
+async function editBook(id){
+
+  const book = books.find(book => book.id === id);
+  if(!book) return;
+
+  const title = prompt("eBook title:", book.title);
+  if(title === null) return;
+
+  const price = prompt("Price:", book.price);
+  if(price === null) return;
+
+  const filePath = prompt(
+    "Supabase PDF file path:",
+    book.download || ""
+  );
+  if(filePath === null) return;
+
+  const { error } = await db
+    .from("ebooks")
+    .update({
+      title: title.trim() || book.title,
+      price: Number(price) || book.price,
+      old_price: (Number(price) || book.price) * 2,
+      file_url: filePath.trim() || null
+    })
+    .eq("id", id);
+
+  if(error){
+    console.log(error);
+    showToast("eBook update nahi hui");
+    return;
+  }
+
+  await renderAdminBooks();
+  renderBooks();
+
+  showToast("eBook updated ✅");
+}
+
+
+async function addNewBook(){
+
+  const title = prompt("eBook title:");
+  if(!title) return;
+
+  const category = prompt(
+    "Category: AI, Programming, Business or Motivation",
+    "Business"
+  );
+  if(!category) return;
+
+  const price = prompt("Price:", "99");
+  if(!price) return;
+
+  const filePath = prompt(
+    "Supabase PDF file path:",
+    ""
+  );
+
+  const { error } = await db
+    .from("ebooks")
+    .insert({
+      title: title.trim(),
+      category: category.trim(),
+      price: Number(price) || 99,
+      old_price: (Number(price) || 99) * 2,
+      description: "Premium digital eBook by Sahil eBook Studio.",
+      cover_class: "c1",
+      cover_text: "NEW",
+      file_url: filePath?.trim() || null,
+      is_active: true
+    });
+
+  if(error){
+    console.log(error);
+    showToast("eBook add nahi hui");
+    return;
+  }
+
+  showToast("eBook added ✅");
+
+  await renderAdminBooks();
+  renderBooks();
+}
+
+async function deleteBook(id){
+
+  if(!confirm("Delete this eBook?")) return;
+
+  const { error } = await db
+    .from("ebooks")
+    .delete()
+    .eq("id", id);
+
+  if(error){
+    console.log(error);
+    showToast("eBook delete nahi hui");
+    return;
+  }
+
+  await renderAdminBooks();
+  renderBooks();
+
+  showToast("eBook deleted ✅");
+}
+
+
+
+/* =========================
+   ADMIN SETTINGS
+   ========================= */
+
+async function renderAdminSettings(){
+
+const { data: settings, error } = await db
+  .from("store_settings")
+  .select("upi_id, support_email")
+  .limit(1)
+  .maybeSingle();
+
+if(error){
+  console.log(error);
+  showToast("Settings load nahi hui");
+  return;
+}
+
+const upi = settings?.upi_id || "";
+const email = settings?.support_email || "";
+
+
+document.getElementById("adminContent").innerHTML=`
+
+<div class="box">
+
+<h3>
+Payment Settings
+</h3>
+
+<input
+id="settingUpi"
+class="input"
+placeholder="Google Pay / UPI ID"
+value="${esc(upi)}">
+
+
+<input
+id="settingEmail"
+class="input"
+type="email"
+placeholder="Support Email"
+value="${esc(email)}">
+
+
+<br><br>
+
+
+<button
+class="btnMain full"
+onclick="saveStoreSettings()">
+
+Save Store Settings
+
+</button>
+
+</div>
+
+
+<br>
+
+`;
+
+}
+
+
+async function saveStoreSettings(){
+
+  const upi =
+    document.getElementById("settingUpi")
+    .value.trim();
+
+  const email =
+    document.getElementById("settingEmail")
+    .value.trim();
+
+  if(!upi || !email){
+    showToast("UPI ID aur Email fill karo");
+    return;
+  }
+
+  const { data: settings, error: loadError } = await db
+    .from("store_settings")
+    .select("id")
+    .limit(1)
+    .maybeSingle();
+
+  if(loadError){
+    console.log(loadError);
+    showToast("Settings check nahi hui");
+    return;
+  }
+
+  let error;
+
+  if(settings){
+
+    const result = await db
+      .from("store_settings")
+      .update({
+        upi_id: upi,
+        support_email: email,
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", settings.id);
+
+    error = result.error;
+
+  }else{
+
+    const result = await db
+      .from("store_settings")
+      .insert({
+        upi_id: upi,
+        support_email: email
+      });
+
+    error = result.error;
+  }
+
+  if(error){
+    console.log(error);
+    showToast("Settings save nahi hui");
+    return;
+  }
+
+  showToast("Store settings saved ✅");
+}
+
+
+/* =========================
+   ADMIN SUPPORT
+   ========================= */
+
+async function renderAdminSupport(){
+
+const { data, error } = await db
+  .from("support_tickets")
+  .select("id, name, email, message, status, created_at")
+  .order("created_at", { ascending:false });
+
+if(error){
+
+  console.log(error);
+
+  showToast("Support tickets load error");
+
+  return;
+}
+
+const tickets = (data || []).map(ticket => ({
+  ...ticket,
+  date: ticket.created_at
+}));
+
+
+const area=
+document.getElementById("adminContent");
+
+
+if(tickets.length===0){
+
+area.innerHTML=`
+
+<div class="order">
+
+No support requests.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+area.innerHTML=
+
+tickets.map(ticket=>`
+
+<div class="order">
+
+<strong>
+${esc(ticket.id)}
+</strong>
+
+<p style="margin-top:7px">
+${esc(ticket.name)}
+</p>
+
+<p>
+${esc(ticket.email)}
+</p>
+
+<p style="
+margin-top:10px;
+color:#b4bad0
+">
+
+${esc(ticket.message)}
+
+</p>
+
+<p style="
+font-size:11px;
+color:#737b93;
+margin-top:8px
+">
+
+${esc(ticket.date)}
+
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* =========================
+   STORE INFO
+   ========================= */
+
+async function updateSupportEmail(){
+
+  const { data, error } = await db
+    .from("store_settings")
+    .select("support_email")
+    .limit(1)
+    .maybeSingle();
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  const email = data?.support_email || "";
+
+  document.getElementById("supportDisplay").innerText =
+    email
+    ? "Support Email: " + email
+    : "Support Email: Not configured";
+}
+
+async function loadOnlineBooks(){
+
+  showToast("Online eBooks loading...");
+
+  const { data, error } = await db
+    .from("ebooks")
+    .select("*")
+    .eq("is_active", true)
+    .order("created_at", { ascending: true });
+
+  if(error){
+    console.log(error);
+    showToast("Supabase connection error");
+    renderBooks();
+    return;
+  }
+
+  books = data.map((book, index) => ({
+    id: index + 1,
+    dbId: book.id,
+    title: book.title,
+    category: book.category,
+    price: Number(book.price),
+    oldPrice: Number(book.old_price || 0),
+    rating: "★★★★★",
+    cover: book.cover_class || "c1",
+    big: book.cover_text || "BOOK",
+    description: book.description || "",
+    learn: [
+      "Practical Concepts",
+      "Step by Step Learning",
+      "Real Examples"
+    ],
+    download: book.file_url || ""
+  }));
+
+  renderBooks();
+
+  showToast("Supabase connected ✅");
+}
+
+/* =========================
+   CLOSE MODAL ON BACKGROUND
+   ========================= */
+
+window.addEventListener(
+"click",
+event=>{
+
+if(event.target.classList.contains("modal")){
+
+event.target.classList.remove("show");
+
+}
+
+}
+);
+
+
+
+/* =========================
+   START WEBSITE
+   ========================= */
+
+db.auth.getSession().then(({data}) => {
+  updateCustomerNav(data?.session?.user || null);
+});
+
+db.auth.onAuthStateChange((_event, session) => {
+  updateCustomerNav(session?.user || null);
+});
+
+addProofInput();
+
+loadOnlineBooks();
+
+updateCart();
+
+updateSupportEmail();
+
+
+
+/* Cinematic home parallax */
+const homeRoom = document.getElementById("homeRoom");
+if(homeRoom){
+  document.addEventListener("mousemove", (e) => {
+    if(window.innerWidth < 750) return;
+    const x = e.clientX / window.innerWidth - .5;
+    const y = e.clientY / window.innerHeight - .5;
+    homeRoom.style.transform = `rotateY(${x * 5}deg) rotateX(${-y * 3}deg) translateX(${x * -10}px) translateY(${y * -6}px)`;
+  });
+  document.addEventListener("mouseleave", () => {
+    homeRoom.style.transform = "rotateY(0deg) rotateX(0deg) translateX(0) translateY(0)";
+  });
+  document.addEventListener("touchmove", (e) => {
+    if(!e.touches || !e.touches[0]) return;
+    const t=e.touches[0];
+    const x=t.clientX/window.innerWidth-.5;
+    const y=t.clientY/window.innerHeight-.5;
+    homeRoom.style.transform=`rotateY(${x*3}deg) rotateX(${-y*2}deg)`;
+  }, {passive:true});
+}
+</script>
+
+</body>
+</html>
