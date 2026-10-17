@@ -1,0 +1,3526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sahil eBook Studio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,sans-serif;
+background:#070914;
+color:#fff;
+overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+z-index:-2;
+background:
+radial-gradient(circle at 10% 15%,rgba(101,67,255,.22),transparent 28%),
+radial-gradient(circle at 90% 35%,rgba(0,174,255,.17),transparent 30%),
+radial-gradient(circle at 50% 85%,rgba(255,52,176,.12),transparent 30%),
+#070914
+}
+
+.navbar{
+height:72px;
+padding:0 5%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(7,9,20,.82);
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.08)
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:900
+}
+
+.logoIcon{
+width:39px;
+height:39px;
+display:grid;
+place-items:center;
+border-radius:12px;
+background:linear-gradient(135deg,#625aff,#bf45ff)
+}
+
+.nav{
+display:flex;
+gap:25px;
+color:#aeb4cc;
+font-size:14px
+}
+
+.topBtns{display:flex;gap:8px}
+
+.btnDark{
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.04);
+color:#fff;
+padding:10px 13px;
+border-radius:11px
+}
+
+.cartWrap{position:relative}
+
+.cartCount{
+position:absolute;
+right:-7px;
+top:-8px;
+background:#8055ff;
+width:21px;
+height:21px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:11px
+}
+
+.hero{
+min-height:90vh;
+padding:65px 6%;
+display:grid;
+grid-template-columns:1.05fr .95fr;
+align-items:center;
+gap:45px
+}
+
+.badge{
+display:inline-block;
+border:1px solid rgba(139,105,255,.38);
+background:rgba(113,77,255,.12);
+color:#c9bcff;
+padding:9px 15px;
+border-radius:30px;
+font-size:13px;
+margin-bottom:20px
+}
+
+.hero h1{
+font-size:clamp(48px,7vw,85px);
+line-height:1;
+letter-spacing:-3px
+}
+
+.gradient{
+display:block;
+margin-top:10px;
+background:linear-gradient(90deg,#64d8ff,#956aff,#ff65c2);
+-webkit-background-clip:text;
+color:transparent
+}
+
+.hero p{
+max-width:600px;
+margin:25px 0;
+line-height:1.8;
+color:#9ca4bf
+}
+
+.btnMain{
+border:0;
+background:linear-gradient(135deg,#625bff,#a143ff);
+color:white;
+padding:14px 21px;
+border-radius:12px;
+font-weight:800;
+box-shadow:0 12px 35px rgba(103,78,255,.28)
+}
+
+.heroButtons{
+display:flex;
+gap:12px;
+flex-wrap:wrap
+}
+
+.stats{
+display:flex;
+gap:35px;
+margin-top:38px
+}
+
+.stats strong{
+display:block;
+font-size:24px
+}
+
+.stats span{
+font-size:11px;
+color:#7f879f
+}
+
+.stage{
+height:500px;
+position:relative
+}
+
+.floatBook{
+position:absolute;
+width:185px;
+height:275px;
+border-radius:12px 20px 20px 11px;
+padding:22px;
+box-shadow:-8px 8px 0 rgba(255,255,255,.07),0 30px 60px rgba(0,0,0,.5);
+animation:float 4s ease-in-out infinite
+}
+
+.floatBook small{font-size:8px;letter-spacing:2px}
+
+.floatBook b{
+display:block;
+font-size:52px;
+margin-top:55px
+}
+
+.floatBook h3{font-size:21px}
+
+.f1{
+left:5%;
+top:40px;
+background:linear-gradient(145deg,#192657,#754dff);
+transform:rotate(-8deg)
+}
+
+.f2{
+right:2%;
+top:110px;
+background:linear-gradient(145deg,#09294d,#008ddf);
+transform:rotate(9deg);
+animation-delay:-1.2s
+}
+
+.f3{
+left:32%;
+bottom:12px;
+background:linear-gradient(145deg,#4c1644,#d63d95);
+transform:rotate(4deg);
+animation-delay:-2s
+}
+
+@keyframes float{
+50%{translate:0 -20px}
+}
+
+.section{padding:85px 6%}
+
+.heading{
+text-align:center;
+max-width:700px;
+margin:0 auto 40px
+}
+
+.kicker{
+font-size:11px;
+letter-spacing:2px;
+font-weight:900;
+color:#9c7eff
+}
+
+.heading h2{
+font-size:clamp(31px,5vw,47px);
+margin:12px 0
+}
+
+.heading p{
+color:#8f97b1;
+line-height:1.7
+}
+
+.filters{
+display:flex;
+gap:8px;
+justify-content:center;
+flex-wrap:wrap;
+margin-bottom:30px
+}
+
+.search{
+width:min(100%,330px);
+background:#101323;
+border:1px solid rgba(255,255,255,.1);
+border-radius:11px;
+padding:13px;
+color:white;
+outline:0
+}
+
+.filter{
+border:1px solid rgba(255,255,255,.1);
+background:#111424;
+color:#a7adc2;
+padding:10px 13px;
+border-radius:10px
+}
+
+.filter.active{
+background:#7358ff;
+color:white
+}
+
+.bookGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px
+}
+
+.card{
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.08);
+border-radius:19px;
+padding:14px
+}
+
+.cover{
+height:325px;
+border-radius:13px;
+padding:25px;
+display:flex;
+flex-direction:column;
+box-shadow:0 20px 40px rgba(0,0,0,.35)
+}
+
+.cover small{
+font-size:8px;
+letter-spacing:2px
+}
+
+.cover b{
+font-size:60px;
+margin-top:65px
+}
+
+.cover h3{font-size:23px}
+
+.c1{background:linear-gradient(145deg,#18265a,#744cff)}
+.c2{background:linear-gradient(145deg,#07284b,#008fe5)}
+.c3{background:linear-gradient(145deg,#4b1543,#df419c)}
+.c4{background:linear-gradient(145deg,#163f32,#00aa72)}
+.c5{background:linear-gradient(145deg,#4b2b15,#ff7c25)}
+.c6{background:linear-gradient(145deg,#1d2146,#ff4e70)}
+
+.info{padding:17px 4px 5px}
+
+.category{
+font-size:11px;
+color:#a088ff
+}
+
+.info h3{
+margin:8px 0;
+font-size:19px
+}
+
+.desc{
+font-size:13px;
+line-height:1.6;
+color:#9098b1;
+min-height:42px
+}
+
+.rating{
+color:#ffd259;
+font-size:12px;
+margin-top:8px
+}
+
+.bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+margin-top:16px
+}
+
+.price{
+font-size:24px;
+font-weight:900
+}
+
+.price del{
+font-size:11px;
+color:#707991
+}
+
+.actions{display:flex;gap:5px}
+
+.actions button{
+border:0;
+padding:9px 10px;
+border-radius:9px;
+color:white
+}
+
+.view{background:#24283c}
+.buy{background:linear-gradient(135deg,#655cff,#9a4cff)}
+
+.featureGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:17px
+}
+
+.feature{
+padding:24px;
+border-radius:17px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.075)
+}
+
+.feature i{font-style:normal;font-size:28px}
+.feature h3{margin:12px 0 6px}
+.feature p{color:#8f97b0;font-size:13px;line-height:1.6}
+
+.support{
+display:grid;
+grid-template-columns:.8fr 1.2fr;
+gap:22px
+}
+
+.box{
+padding:28px;
+border-radius:20px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08)
+}
+
+.input{
+width:100%;
+padding:13px;
+background:#0d1020;
+border:1px solid rgba(255,255,255,.1);
+border-radius:10px;
+color:white;
+outline:none;
+margin-top:10px
+}
+
+textarea.input{
+height:110px;
+resize:none
+}
+
+footer{
+border-top:1px solid rgba(255,255,255,.08);
+padding:40px 6%;
+color:#858da7;
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:25px
+}
+
+footer strong{color:white}
+footer p{font-size:13px;line-height:1.7;margin-top:7px}
+
+footer button{
+border:0;
+background:none;
+color:#707990;
+margin-top:14px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.78);
+z-index:3000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px
+}
+
+.modal.show{display:flex}
+
+.modalBox{
+width:min(100%,600px);
+max-height:91vh;
+overflow:auto;
+background:#101322;
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+padding:24px
+}
+
+.close{
+float:right;
+width:36px;
+height:36px;
+border:0;
+border-radius:50%;
+background:#24283c;
+color:white
+}
+
+.paymentCard{
+padding:20px;
+margin:17px 0;
+border-radius:15px;
+background:rgba(108,78,255,.09);
+border:1px solid rgba(126,94,255,.25)
+}
+
+.amount{
+font-size:34px;
+font-weight:900;
+margin:7px 0
+}
+
+.qr{
+width:190px;
+height:190px;
+background:white;
+border-radius:13px;
+padding:8px;
+display:block;
+margin:17px auto
+}
+
+.notice{
+font-size:12px;
+line-height:1.6;
+padding:11px;
+border-radius:9px;
+background:rgba(255,188,61,.08);
+border:1px solid rgba(255,188,61,.22);
+color:#f3c971
+}
+
+.order{
+padding:17px;
+background:#181b2d;
+border-radius:13px;
+margin-top:13px
+}
+
+.pending{color:#ffca5f}
+.approved{color:#61dda0}
+.rejected{color:#ff6f89}
+
+.full{width:100%}
+
+.cart{
+position:fixed;
+right:-100%;
+top:0;
+height:100vh;
+width:min(92%,390px);
+background:#0c0f1c;
+z-index:2500;
+border-left:1px solid rgba(255,255,255,.08);
+padding:22px;
+transition:.35s;
+overflow:auto
+}
+
+.cart.open{right:0}
+
+.cartHead{
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.cartItem{
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid rgba(255,255,255,.07);
+padding:16px 0
+}
+
+.remove{
+border:0;
+background:none;
+color:#ff728e
+}
+
+.total{
+display:flex;
+justify-content:space-between;
+font-size:21px;
+font-weight:bold;
+margin:22px 0
+}
+
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translate(-50%,120px);
+background:white;
+color:#111;
+padding:11px 18px;
+border-radius:11px;
+font-weight:bold;
+font-size:13px;
+z-index:5000;
+transition:.3s
+}
+
+.toast.show{transform:translate(-50%,0)}
+
+.tabs{
+display:flex;
+gap:7px;
+overflow:auto;
+margin:15px 0
+}
+
+.tab{
+white-space:nowrap;
+border:1px solid rgba(255,255,255,.1);
+background:#181b2c;
+color:#adb3c8;
+padding:9px 12px;
+border-radius:9px
+}
+
+.tab.active{
+background:#7358ff;
+color:white
+}
+
+.adminBook{
+padding:15px;
+background:#171a2b;
+border-radius:12px;
+margin:10px 0
+}
+
+.adminButtons{
+display:flex;
+gap:8px;
+margin-top:10px
+}
+
+.adminButtons button{
+border:0;
+padding:8px 10px;
+border-radius:8px;
+color:#fff
+}
+
+.approveBtn{background:#15865c}
+.rejectBtn{background:#b93a55}
+
+@media(max-width:900px){
+.nav{display:none}
+.hero{grid-template-columns:1fr}
+.bookGrid{grid-template-columns:repeat(2,1fr)}
+.featureGrid{grid-template-columns:repeat(2,1fr)}
+.support{grid-template-columns:1fr}
+footer{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+.navbar{padding:0 4%}
+.logo span{font-size:14px}
+.hero{padding:50px 5%}
+.hero h1{font-size:44px}
+.stage{height:420px}
+.floatBook{width:145px;height:220px;padding:17px}
+.floatBook b{font-size:39px;margin-top:38px}
+.floatBook h3{font-size:17px}
+.f1{left:3%}
+.f2{right:1%}
+.f3{left:29%}
+.section{padding:70px 5%}
+.bookGrid{grid-template-columns:1fr}
+.cover{height:390px}
+.featureGrid{grid-template-columns:1fr}
+.stats{gap:22px}
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<div class="logoIcon">📚</div>
+<span>Sahil eBook Studio</span>
+</div>
+
+<nav class="nav">
+<a href="#home">Home</a>
+<a href="#ebooks">eBooks</a>
+<a href="#support">Support</a>
+</nav>
+
+<div class="topBtns">
+
+<button class="btnDark" onclick="openDashboard()">
+👤 Dashboard
+</button>
+
+<button class="btnDark cartWrap" onclick="toggleCart()">
+🛒
+<span class="cartCount" id="cartCount">0</span>
+</button>
+
+</div>
+</header>
+
+
+<section class="hero" id="home">
+
+<div>
+
+<div class="badge">
+✨ Premium Digital eBooks
+</div>
+
+<h1>
+Learn. Grow.
+<span class="gradient">Upgrade Yourself.</span>
+</h1>
+
+<p>
+Practical digital eBooks for AI, programming, online earning,
+motivation aur study. Simple language me seekho aur apne skills
+ko next level par le jao.
+</p>
+
+<div class="heroButtons">
+
+<a href="#ebooks" class="btnMain">
+Explore eBooks →
+</a>
+
+<button class="btnDark" onclick="openDashboard()">
+My Library
+</button>
+
+</div>
+
+<div class="stats">
+<div><strong>10+</strong><span>eBooks</span></div>
+<div><strong>5+</strong><span>Categories</span></div>
+<div><strong>24×7</strong><span>Digital Access</span></div>
+</div>
+
+</div>
+
+
+<div class="stage">
+
+<div class="floatBook f1">
+<small>SAHIL EBOOK STUDIO</small>
+<b>AI</b>
+<h3>Prompt Engineering</h3>
+</div>
+
+<div class="floatBook f2">
+<small>SAHIL EBOOK STUDIO</small>
+<b>PY</b>
+<h3>Python Programming</h3>
+</div>
+
+<div class="floatBook f3">
+<small>SAHIL EBOOK STUDIO</small>
+<b>01</b>
+<h3>Success Mindset</h3>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="ebooks">
+
+<div class="heading">
+<div class="kicker">OUR COLLECTION</div>
+<h2>Premium eBooks</h2>
+<p>
+Search karo, details dekho aur apni pasand ki eBook purchase karo.
+</p>
+</div>
+
+<div class="filters">
+
+<input
+id="search"
+class="search"
+placeholder="Search eBooks..."
+oninput="renderBooks()">
+
+<button class="filter active" onclick="filterBooks('All',this)">All</button>
+<button class="filter" onclick="filterBooks('AI',this)">AI</button>
+<button class="filter" onclick="filterBooks('Programming',this)">Programming</button>
+<button class="filter" onclick="filterBooks('Business',this)">Business</button>
+<button class="filter" onclick="filterBooks('Motivation',this)">Motivation</button>
+
+</div>
+
+<div class="bookGrid" id="bookGrid"></div>
+
+</section>
+
+
+<section class="section">
+
+<div class="heading">
+<div class="kicker">WHY US</div>
+<h2>Everything You Need</h2>
+</div>
+
+<div class="featureGrid">
+
+<div class="feature">
+<i>⚡</i>
+<h3>Fast Delivery</h3>
+<p>Approved payment ke baad dashboard se eBook access.</p>
+</div>
+
+<div class="feature">
+<i>📱</i>
+<h3>Mobile Friendly</h3>
+<p>Phone, tablet aur computer par easily read karo.</p>
+</div>
+
+<div class="feature">
+<i>🔐</i>
+<h3>Order Tracking</h3>
+<p>Dashboard me payment verification status check karo.</p>
+</div>
+
+<div class="feature">
+<i>💬</i>
+<h3>Support</h3>
+<p>Order ya payment related query directly submit karo.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="support">
+
+<div class="heading">
+<div class="kicker">CUSTOMER SUPPORT</div>
+<h2>Need Help?</h2>
+</div>
+
+<div class="support">
+
+<div class="box">
+<h2>Sahil eBook Studio</h2>
+<p style="color:#9098b0;line-height:1.8;margin-top:10px">
+Order, payment ya eBook se related koi issue ho to support form
+submit karein.
+</p>
+<p id="supportDisplay" style="margin-top:20px">
+Support Email: Not configured
+</p>
+</div>
+
+<form class="box" onsubmit="submitSupport(event)">
+
+<input id="sName" class="input" required placeholder="Your Name">
+<input id="sEmail" class="input" type="email" required placeholder="Your Email">
+<textarea id="sMessage" class="input" required placeholder="Your Message"></textarea>
+
+<br><br>
+
+<button class="btnMain full">
+Submit Support Request
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div>
+<strong>Sahil eBook Studio</strong>
+<p>
+Practical digital learning resources created by Sahil Singh.
+</p>
+</div>
+
+<div>
+<strong>Customer</strong>
+<p>My Dashboard</p>
+<p>My Orders</p>
+<p>Support</p>
+</div>
+
+<div>
+<strong>Legal</strong>
+<p onclick="showModal('privacyModal')" style="cursor:pointer">Privacy Policy</p>
+<p onclick="showModal('termsModal')" style="cursor:pointer">Terms & Conditions</p>
+<p onclick="showModal('refundModal')" style="cursor:pointer">Refund Policy</p>
+
+<button onclick="openAdminLogin()">
+⚙ Admin
+</button>
+</div>
+
+</footer>
+
+<!-- PRIVACY POLICY -->
+<div id="privacyModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('privacyModal')">×</button>
+
+    <h2>Privacy Policy</h2>
+
+    <p>
+      Sahil eBook Studio customer ki privacy ko respect karta hai.
+      Order, account aur support ke liye hum name, email, phone number,
+      transaction/UTR number aur optional payment proof collect kar sakte hain.
+    </p>
+
+    <p>
+      Ye information order verification, eBook delivery, customer support
+      aur account management ke liye use hoti hai.
+    </p>
+
+    <p>
+      Data Supabase jaise secure service providers par store ho sakta hai.
+      Hum customer information ko advertisers ko sell nahi karte.
+    </p>
+
+    <p>
+      Payment proof aur personal information sirf zaroorat ke according
+      access ki jaati hai.
+    </p>
+
+  </div>
+</div>
+
+
+<!-- TERMS -->
+<div id="termsModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('termsModal')">×</button>
+
+    <h2>Terms & Conditions</h2>
+
+    <p>
+      Sahil eBook Studio se purchased eBooks personal use ke liye hain.
+    </p>
+
+    <p>
+      eBook ko copy, resell, publicly upload, share ya redistribute karna
+      allowed nahi hai unless written permission di gayi ho.
+    </p>
+
+    <p>
+      Payment manually verify hone ke baad order approve kiya ja sakta hai
+      aur purchased eBook customer account me available hoti hai.
+    </p>
+
+    <p>
+      Wrong UTR, fake payment proof ya fraudulent activity par order reject
+      ya account access restrict kiya ja sakta hai.
+    </p>
+
+  </div>
+</div>
+
+
+<!-- REFUND POLICY -->
+<div id="refundModal" class="modal">
+  <div class="modalBox">
+
+    <button class="close"
+      onclick="closeModal('refundModal')">×</button>
+
+    <h2>Refund Policy</h2>
+
+    <p>
+      eBooks digital products hain. Download/access provide hone ke baad
+      normally refund nahi diya jata, subject to applicable law.
+    </p>
+
+    <p>
+      Agar duplicate payment ho, wrong product deliver ho, ya verified
+      technical problem ki wajah se purchased eBook access na ho paaye,
+      customer support se contact kar sakta hai.
+    </p>
+
+    <p>
+      Eligible refund requests payment verification ke baad review ki jayengi.
+    </p>
+
+  </div>
+</div>
+<div id="bookModal" class="modal">
+<div class="modalBox">
+<button class="close" onclick="closeModal('bookModal')">×</button>
+<div id="bookDetails"></div>
+</div>
+</div>
+
+
+<div id="checkoutModal" class="modal">
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('checkoutModal')">×</button>
+
+<h2>Complete Payment</h2>
+
+<p style="color:#9199b2;margin-top:8px">
+Google Pay, PhonePe, Paytm ya kisi bhi UPI app se payment karein.
+</p>
+
+<div class="paymentCard">
+
+<div>Amount</div>
+<div class="amount" id="payAmount">₹0</div>
+
+<div>UPI ID</div>
+<strong id="upiDisplay">Not configured</strong>
+
+<img id="qrImage" class="qr" style="display:none">
+
+<button
+id="gpayButton"
+class="btnMain full"
+style="display:none"
+onclick="openGpay()">
+Pay with Google Pay / UPI
+</button>
+
+</div>
+
+<div id="paymentWarning" class="notice">
+UPI ID abhi configure nahi hai.
+</div>
+
+<br>
+
+<input id="buyerName" class="input" placeholder="Customer Name">
+<input id="buyerEmail" class="input" type="email" placeholder="Email">
+<input id="buyerPhone" class="input" type="tel" placeholder="Phone Number">
+<input id="utr" class="input" placeholder="Transaction / UTR Number">
+
+<br><br>
+
+<button class="btnMain full" onclick="submitOrder()">
+Submit Payment
+</button>
+
+</div>
+</div>
+
+<div id="dashboardModal" class="modal">
+<div class="modalBox">
+
+<button class="close"
+onclick="closeModal('dashboardModal')">×</button>
+
+<h2>Customer Account</h2>
+
+<p style="color:#8f97af;margin-top:7px">
+Login ya Sign Up karke apne purchased eBooks dekhein.
+</p>
+
+<div id="customerAuthBox">
+
+<input
+id="customerEmail"
+class="input"
+type="email"
+placeholder="Email">
+
+<input
+id="customerPassword"
+class="input"
+type="password"
+placeholder="Password">
+
+<br><br>
+
+<button
+class="btnMain full"
+onclick="customerLogin()">
+Login
+</button>
+
+<br><br>
+
+<button
+class="btnDark full"
+onclick="customerSignup()">
+Create New Account
+</button>
+
+</div>
+
+
+<div id="customerAccountBox" style="display:none">
+
+<p id="customerLoggedEmail"
+style="color:#9ca4bf;margin:15px 0">
+</p>
+
+<button
+class="btnMain full"
+onclick="loadDashboard()">
+My Orders & eBooks
+</button>
+
+<br><br>
+
+<button
+class="btnDark full"
+onclick="customerLogout()">
+Logout
+</button>
+
+<div id="dashboardData"></div>
+
+</div>
+
+</div>
+</div>
+
+<div id="adminLoginModal" class="modal">
+<div class="modalBox">
+
+<button class="close"
+onclick="closeModal('adminLoginModal')">×</button>
+
+<h2>Admin Login</h2>
+
+<p style="color:#9299b0;margin-top:8px">
+Sahil eBook Studio Admin
+</p>
+
+<input
+id="adminEmailInput"
+class="input"
+type="email"
+placeholder="Admin Email">
+
+<input
+id="adminPasswordInput"
+class="input"
+type="password"
+placeholder="Admin Password">
+
+<br><br>
+
+<button class="btnMain full"
+onclick="adminLogin()">
+Login
+</button>
+
+</div>
+</div>
+
+
+<div id="adminModal" class="modal">
+<div class="modalBox">
+
+<button class="close" onclick="closeModal('adminModal')">×</button>
+
+<h2>Admin Dashboard</h2>
+
+<div class="tabs">
+
+<button class="tab active" onclick="adminTab('orders',this)">
+Orders
+</button>
+
+<button class="tab" onclick="adminTab('books',this)">
+eBooks
+</button>
+
+<button class="tab" onclick="adminTab('settings',this)">
+Settings
+</button>
+
+<button class="tab" onclick="adminTab('support',this)">
+Support
+</button>
+
+</div>
+
+<div id="adminContent"></div>
+
+</div>
+</div>
+
+
+<div id="cart" class="cart">
+
+<div class="cartHead">
+
+<h2>Your Cart</h2>
+
+<button class="close" onclick="toggleCart()">×</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="total">
+<span>Total</span>
+<span id="cartTotal">₹0</span>
+</div>
+
+<button class="btnMain full" onclick="checkoutCart()">
+Proceed to Payment
+</button>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://qzpbubxqujohjseiincw.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_CISE0EBakHgPejiDw2jazA_xM2ASXMV";
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* =========================
+   SAHIL EBOOK STUDIO V2
+   ========================= */
+
+const defaultBooks = [
+
+{
+id:1,
+title:"Prompt Engineering Zero to Hero",
+category:"AI",
+price:99,
+oldPrice:199,
+rating:"★★★★★",
+cover:"c1",
+big:"AI",
+description:"ChatGPT aur AI tools ke liye basic se advanced prompt engineering.",
+learn:[
+"Prompt Engineering Basics",
+"Advanced Prompt Frameworks",
+"ChatGPT Productivity",
+"Real Prompt Examples"
+],
+download:""
+},
+
+{
+id:2,
+title:"Python Programming Complete Guide",
+category:"Programming",
+price:149,
+oldPrice:299,
+rating:"★★★★★",
+cover:"c2",
+big:"PY",
+description:"Python programming beginner se advanced level tak practical examples ke saath.",
+learn:[
+"Python Fundamentals",
+"Variables & Data Types",
+"Functions & OOP",
+"Projects & Practice"
+],
+download:""
+},
+
+{
+id:3,
+title:"Success Mindset",
+category:"Motivation",
+price:79,
+oldPrice:149,
+rating:"★★★★★",
+cover:"c3",
+big:"01",
+description:"Discipline, confidence aur growth mindset build karne ki practical guide.",
+learn:[
+"Goal Setting",
+"Daily Discipline",
+"Confidence",
+"Growth Mindset"
+],
+download:""
+},
+
+{
+id:4,
+title:"Online Earning Roadmap",
+category:"Business",
+price:129,
+oldPrice:249,
+rating:"★★★★☆",
+cover:"c4",
+big:"₹",
+description:"Beginners ke liye online earning aur digital skills ka practical roadmap.",
+learn:[
+"Skill Selection",
+"Freelancing",
+"Digital Products",
+"90 Day Roadmap"
+],
+download:""
+},
+
+{
+id:5,
+title:"Instagram Growth Playbook",
+category:"Business",
+price:99,
+oldPrice:199,
+rating:"★★★★★",
+cover:"c5",
+big:"IG",
+description:"Instagram reels, content strategy aur audience growth ki complete guide.",
+learn:[
+"Profile Optimization",
+"Reels Strategy",
+"Hooks",
+"Audience Growth"
+],
+download:""
+},
+
+{
+id:6,
+title:"Productivity Mastery",
+category:"Motivation",
+price:69,
+oldPrice:129,
+rating:"★★★★☆",
+cover:"c6",
+big:"24",
+description:"Time management, habits aur focused execution ke practical systems.",
+learn:[
+"Daily Planning",
+"Focus",
+"Habits",
+"Weekly Review"
+],
+download:""
+}
+
+];
+
+
+let books =
+JSON.parse(localStorage.getItem("sahilBooks"))
+|| defaultBooks;
+
+let cart =
+JSON.parse(localStorage.getItem("sahilCart"))
+|| [];
+
+let currentFilter="All";
+
+let checkoutBooks=[];
+
+
+
+/* =========================
+   SMALL HELPERS
+   ========================= */
+
+function esc(value){
+
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function money(value){
+
+return "₹" + Number(value || 0);
+
+}
+
+
+function showToast(message){
+
+const toast=document.getElementById("toast");
+
+toast.innerText=message;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2300);
+
+}
+
+
+function showModal(id){
+
+document
+.getElementById(id)
+.classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+}
+
+
+
+/* =========================
+   BOOK STORE
+   ========================= */
+
+function renderBooks(){
+
+const searchValue=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+const filtered=books.filter(book=>{
+
+const filterMatch=
+currentFilter==="All"
+|| book.category===currentFilter;
+
+const searchMatch=
+book.title.toLowerCase().includes(searchValue)
+|| book.category.toLowerCase().includes(searchValue);
+
+return filterMatch && searchMatch;
+
+});
+
+
+document.getElementById("bookGrid").innerHTML=
+
+filtered.map(book=>`
+
+<div class="card">
+
+<div class="cover ${book.cover}">
+
+<small>
+SAHIL EBOOK STUDIO
+</small>
+
+<b>
+${esc(book.big)}
+</b>
+
+<h3>
+${esc(book.title)}
+</h3>
+
+</div>
+
+
+<div class="info">
+
+<span class="category">
+${esc(book.category)}
+</span>
+
+<h3>
+${esc(book.title)}
+</h3>
+
+<p class="desc">
+${esc(book.description)}
+</p>
+
+<div class="rating">
+${esc(book.rating)}
+</div>
+
+
+<div class="bottom">
+
+<div class="price">
+
+${money(book.price)}
+
+<del>
+${money(book.oldPrice)}
+</del>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="view"
+onclick="viewBook(${book.id})">
+
+View
+
+</button>
+
+
+<button
+class="buy"
+onclick="addCart(${book.id})">
+
+Buy
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+function filterBooks(category,button){
+
+currentFilter=category;
+
+document
+.querySelectorAll(".filter")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+renderBooks();
+
+}
+
+
+function viewBook(id){
+
+const book=books.find(book=>book.id===id);
+
+if(!book)return;
+
+
+document.getElementById("bookDetails").innerHTML=`
+
+<div
+class="cover ${book.cover}"
+style="height:220px;margin-top:20px">
+
+<small>
+SAHIL EBOOK STUDIO
+</small>
+
+<b style="margin-top:30px">
+${esc(book.big)}
+</b>
+
+<h3>
+${esc(book.title)}
+</h3>
+
+</div>
+
+
+<br>
+
+<div class="category">
+${esc(book.category)}
+</div>
+
+<h2 style="margin-top:7px">
+${esc(book.title)}
+</h2>
+
+<p style="
+color:#969eb7;
+line-height:1.7;
+margin-top:10px
+">
+
+${esc(book.description)}
+
+</p>
+
+
+<h3 style="margin-top:20px">
+What You'll Learn
+</h3>
+
+<ul style="
+padding-left:20px;
+margin:10px 0 20px;
+line-height:1.9;
+color:#bcc1d2
+">
+
+${book.learn.map(item=>
+`<li>${esc(item)}</li>`
+).join("")}
+
+</ul>
+
+
+<div class="price">
+${money(book.price)}
+
+<del>
+${money(book.oldPrice)}
+</del>
+</div>
+
+<br>
+
+<button
+class="btnMain full"
+onclick="buyNow(${book.id})">
+
+Buy Now
+
+</button>
+
+`;
+
+showModal("bookModal");
+
+}
+
+
+
+/* =========================
+   CART
+   ========================= */
+
+function addCart(id){
+
+const book=books.find(book=>book.id===id);
+
+if(!book)return;
+
+
+if(cart.some(item=>item.id===id)){
+
+showToast("Already in cart");
+
+return;
+
+}
+
+cart.push(book);
+
+saveCart();
+
+showToast("Added to cart 🛒");
+
+}
+
+
+function removeCart(id){
+
+cart=cart.filter(item=>item.id!==id);
+
+saveCart();
+
+}
+
+
+function saveCart(){
+
+localStorage.setItem(
+"sahilCart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+}
+
+
+function updateCart(){
+
+document.getElementById("cartCount").innerText=
+cart.length;
+
+
+const area=document.getElementById("cartItems");
+
+
+if(cart.length===0){
+
+area.innerHTML=`
+
+<p style="
+color:#8991aa;
+margin-top:25px
+">
+
+Your cart is empty.
+
+</p>
+
+`;
+
+}else{
+
+area.innerHTML=cart.map(book=>`
+
+<div class="cartItem">
+
+<div>
+
+<strong>
+${esc(book.title)}
+</strong>
+
+<p style="
+font-size:12px;
+color:#9299af;
+margin-top:5px
+">
+
+${money(book.price)}
+
+</p>
+
+</div>
+
+
+<button
+class="remove"
+onclick="removeCart(${book.id})">
+
+Remove
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+document.getElementById("cartTotal").innerText=
+
+money(
+cart.reduce(
+(sum,item)=>sum+Number(item.price),
+0
+)
+);
+
+}
+
+
+function toggleCart(){
+
+document
+.getElementById("cart")
+.classList.toggle("open");
+
+}
+
+
+function buyNow(id){
+
+const book=books.find(book=>book.id===id);
+
+checkoutBooks=[book];
+
+closeModal("bookModal");
+
+prepareCheckout();
+
+}
+
+
+function checkoutCart(){
+
+if(cart.length===0){
+
+showToast("Cart is empty");
+
+return;
+
+}
+
+checkoutBooks=[...cart];
+
+toggleCart();
+
+prepareCheckout();
+
+}
+
+
+
+/* =========================
+   PAYMENT / GOOGLE PAY
+   ========================= */
+
+function getCheckoutTotal(){
+
+return checkoutBooks.reduce(
+(sum,item)=>sum+Number(item.price),
+0
+);
+
+}
+
+
+function createUpiLink(upi){
+
+if(!upi)return "";
+
+const amount=getCheckoutTotal();
+
+const orderNote=
+"Sahil eBook Studio Order";
+
+
+return (
+"upi://pay"
++"?pa="+encodeURIComponent(upi)
++"&pn="+encodeURIComponent("Sahil eBook Studio")
++"&am="+encodeURIComponent(amount)
++"&cu=INR"
++"&tn="+encodeURIComponent(orderNote)
+);
+
+}
+
+
+async function prepareCheckout(){
+
+const amount=getCheckoutTotal();
+
+document.getElementById("payAmount").innerText=
+money(amount);
+
+
+const { data: settings, error } = await db
+  .from("store_settings")
+  .select("upi_id")
+  .limit(1)
+  .maybeSingle();
+
+if(error){
+  console.log(error);
+  showToast("Payment settings load nahi hui");
+  return;
+}
+
+const upi = settings?.upi_id || "";
+window.currentStoreUpi = upi;
+const display=
+document.getElementById("upiDisplay");
+
+const qr=
+document.getElementById("qrImage");
+
+const payButton=
+document.getElementById("gpayButton");
+
+const warning=
+document.getElementById("paymentWarning");
+
+
+if(upi){
+
+display.innerText=upi;
+
+const upiLink=createUpiLink(upi);
+
+qr.src=
+"https://api.qrserver.com/v1/create-qr-code/"
++"?size=220x220&data="
++encodeURIComponent(upiLink);
+
+qr.style.display="block";
+
+payButton.style.display="block";
+
+warning.innerHTML=
+"✅ UPI ID configured. Payment ke baad UTR number submit karein.";
+
+}else{
+
+display.innerText="Not configured";
+
+qr.style.display="none";
+
+payButton.style.display="none";
+
+warning.innerHTML=
+"⚠️ Live UPI ID configure nahi hai. Real payment mat karein.";
+
+}
+
+
+showModal("checkoutModal");
+
+}
+
+
+function openGpay(){
+
+const link=createUpiLink(window.currentStoreUpi);
+
+if(!link){
+
+showToast("UPI ID not configured");
+
+return;
+
+}
+
+window.location.href=link;
+
+}
+
+
+
+/* =========================
+   PAYMENT PROOF
+   ========================= */
+
+function addProofInput(){
+
+const utr=document.getElementById("utr");
+
+if(document.getElementById("paymentProof"))
+return;
+
+
+utr.insertAdjacentHTML(
+"afterend",
+`
+
+<div style="margin-top:13px">
+
+<label
+style="
+font-size:12px;
+color:#a9b0c4
+">
+
+Payment Screenshot (Optional)
+
+</label>
+
+<input
+id="paymentProof"
+class="input"
+type="file"
+accept="image/*">
+
+</div>
+
+`
+);
+
+}
+
+
+function fileToDataURL(file){
+
+return new Promise((resolve,reject)=>{
+
+const reader=new FileReader();
+
+reader.onload=()=>resolve(reader.result);
+
+reader.onerror=reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+
+/* =========================
+   SUBMIT ORDER
+   ========================= */
+
+async function submitOrder(){
+
+const upi = window.currentStoreUpi || "";
+
+
+if(!upi){
+
+showToast("First configure UPI ID");
+
+return;
+
+}
+
+
+const name=
+document.getElementById("buyerName")
+.value.trim();
+
+const email=
+document.getElementById("buyerEmail")
+.value.trim()
+.toLowerCase();
+
+const phone=
+document.getElementById("buyerPhone")
+.value.trim();
+
+const utr=
+document.getElementById("utr")
+.value.trim();
+
+
+if(!name){
+
+showToast("Enter customer name");
+
+return;
+
+}
+
+
+if(!email || !email.includes("@")){
+
+showToast("Enter valid email");
+
+return;
+
+}
+
+
+if(!phone){
+
+showToast("Enter phone number");
+
+return;
+
+}
+
+
+if(!utr){
+
+showToast("Enter UTR number");
+
+return;
+
+}
+
+
+let proof="";
+
+const fileInput=
+document.getElementById("paymentProof");
+
+
+if(
+fileInput
+&& fileInput.files
+&& fileInput.files[0]
+){
+
+const file=fileInput.files[0];
+
+
+if(file.size > 650000){
+
+showToast("Screenshot 650KB se chhota rakho");
+
+return;
+
+}
+
+
+try{
+
+proof=await fileToDataURL(file);
+
+}catch(error){
+
+proof="";
+
+}
+
+}
+
+/* ===== SAVE ORDER TO SUPABASE ===== */
+
+const onlineOrderId = crypto.randomUUID();
+
+const onlineOrderCode =
+"SES" + Date.now().toString().slice(-8);
+
+const onlineTotal = checkoutBooks.reduce(
+  (sum, item) => sum + Number(item.price),
+  0
+);
+
+const { data: userData, error: userError } =
+await db.auth.getUser();
+
+const loggedUser = userData?.user;
+
+if(userError || !loggedUser){
+
+  showToast("Pehle customer account me login karo");
+
+  return;
+}
+
+if(
+  email.toLowerCase() !==
+  loggedUser.email.toLowerCase()
+)
+
+{
+
+  showToast("Checkout me wahi email dalo jisse login kiya hai");
+
+  return;
+}
+/* CREATE ORDER */
+
+const { error: orderError } = await db
+  .from("orders")
+  .insert({
+    id: onlineOrderId,
+    user_id: loggedUser.id,
+    order_code: onlineOrderCode,
+    customer_name: name,
+    email: email,
+    phone: phone,
+    total_amount: onlineTotal,
+    status: "pending"
+  });
+
+
+if(orderError){
+
+  console.log(orderError);
+
+  showToast("Online order save error");
+
+  return;
+}
+
+
+/* CREATE ORDER ITEMS */
+
+const onlineItems = checkoutBooks.map(book => ({
+  order_id: onlineOrderId,
+  ebook_id: book.dbId || null,
+  title_snapshot: book.title,
+  price_snapshot: Number(book.price)
+}));
+
+
+const { error: itemError } = await db
+  .from("order_items")
+  .insert(onlineItems);
+
+
+if(itemError){
+
+  console.log(itemError);
+
+  showToast("Order items save error");
+
+  return;
+}
+
+
+
+let proofPath = null;
+
+const proofFile =
+  document.getElementById("paymentProof")?.files?.[0];
+
+if(proofFile){
+
+  const ext =
+    proofFile.name.split(".").pop() || "jpg";
+
+  proofPath =
+    `${loggedUser.id}/${onlineOrderId}-${Date.now()}.${ext}`;
+
+  const { error: uploadError } = await db.storage
+    .from("payment-proofs")
+    .upload(proofPath, proofFile);
+
+  if(uploadError){
+    console.log(uploadError);
+    showToast("Payment screenshot upload nahi hui");
+    return;
+  }
+}
+
+/* SAVE UTR / PAYMENT */
+
+/* SAVE UTR / PAYMENT */
+
+const { error: paymentError } = await db
+  .from("payment_submissions")
+  .insert({
+    order_id: onlineOrderId,
+    utr: utr,
+    proof_url: proofPath,
+    status: "pending"
+  });
+
+
+if(paymentError){
+
+  console.log(paymentError);
+
+  showToast("Payment details save error");
+
+  return;
+}
+
+
+showToast("Online order saved ✅");
+
+
+cart=[];
+
+saveCart();
+
+checkoutBooks=[];
+
+
+document.getElementById("buyerName").value="";
+document.getElementById("buyerEmail").value="";
+document.getElementById("buyerPhone").value="";
+document.getElementById("utr").value="";
+
+
+if(fileInput)
+fileInput.value="";
+
+
+closeModal("checkoutModal");
+
+showToast("Order submitted ✅");
+
+}
+
+
+
+/* =========================
+   CUSTOMER DASHBOARD
+   ========================= */
+
+async function openDashboard(){
+
+  showModal("dashboardModal");
+
+  const { data } = await db.auth.getSession();
+
+  const user = data.session?.user || null;
+
+  setCustomerUI(user);
+}
+
+
+function setCustomerUI(user){
+
+  const authBox =
+    document.getElementById("customerAuthBox");
+
+  const accountBox =
+    document.getElementById("customerAccountBox");
+
+  const emailText =
+    document.getElementById("customerLoggedEmail");
+
+  if(user){
+
+    authBox.style.display = "none";
+    accountBox.style.display = "block";
+
+    emailText.innerText =
+      "Logged in as: " + user.email;
+
+  }else{
+
+    authBox.style.display = "block";
+    accountBox.style.display = "none";
+
+    emailText.innerText = "";
+
+  }
+
+}
+
+
+async function customerSignup(){
+
+  const email =
+    document.getElementById("customerEmail")
+    .value.trim();
+
+  const password =
+    document.getElementById("customerPassword")
+    .value;
+
+  if(!email || password.length < 6){
+
+    showToast("Valid email aur 6+ character password dalo");
+
+    return;
+  }
+
+  const { data, error } =
+    await db.auth.signUp({
+      email: email,
+      password: password
+    });
+
+  if(error){
+
+    console.log(error);
+
+    showToast(error.message);
+
+    return;
+  }
+
+  if(data.session){
+
+    setCustomerUI(data.user);
+
+    showToast("Account created ✅");
+
+  }else{
+
+    showToast("Account created. Email verify karo ✅");
+
+  }
+
+}
+
+async function customerLogin(){
+
+  const email =
+    document.getElementById("customerEmail")
+    .value.trim();
+
+  const password =
+    document.getElementById("customerPassword")
+    .value;
+
+  if(!email || !password){
+
+    showToast("Email aur password enter karo");
+
+    return;
+  }
+
+  const { data, error } =
+    await db.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Wrong email or password");
+
+    return;
+  }
+
+  setCustomerUI(data.user);
+
+  showToast("Login successful ✅");
+
+}
+
+
+async function customerLogout(){
+
+  await db.auth.signOut();
+
+  setCustomerUI(null);
+
+  document.getElementById("dashboardData").innerHTML = "";
+
+  showToast("Logged out");
+
+}
+
+async function loadDashboard(){
+
+  const box =
+    document.getElementById("dashboardData");
+
+  box.innerHTML = `
+    <div class="order">
+      Loading your eBooks...
+    </div>
+  `;
+
+
+  const { data: userData, error: userError } =
+    await db.auth.getUser();
+
+  const user = userData?.user;
+
+
+  if(userError || !user){
+
+    box.innerHTML = `
+      <div class="order">
+        Please login first.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const { data: orders, error } = await db
+    .from("orders")
+    .select(`
+      id,
+      order_code,
+      total_amount,
+      status,
+      created_at,
+      order_items (
+        ebook_id,
+        title_snapshot,
+        price_snapshot,
+        ebooks (
+          title,
+          file_url
+        )
+      )
+    `)
+    .order("created_at", { ascending:false });
+
+
+  if(error){
+
+    console.log(error);
+
+    box.innerHTML = `
+      <div class="order">
+        Orders load nahi ho paaye.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if(!orders || orders.length === 0){
+
+    box.innerHTML = `
+      <div class="order">
+        Abhi koi purchased eBook nahi hai.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  let finalHTML = "";
+
+
+  for(const order of orders){
+
+    let statusClass = "pending";
+    let statusText = "Payment Verification Pending";
+
+    if(order.status === "approved"){
+      statusClass = "approved";
+      statusText = "Payment Approved";
+    }
+
+    if(order.status === "rejected"){
+      statusClass = "rejected";
+      statusText = "Payment Rejected";
+    }
+
+
+    let downloadHTML = "";
+
+
+    if(order.status === "approved"){
+
+      for(const item of (order.order_items || [])){
+
+        const ebook = item.ebooks;
+
+        if(ebook && ebook.file_url){
+
+          const { data: signedData, error: signedError } =
+            await db.storage
+            .from("ebooks")
+            .createSignedUrl(
+              ebook.file_url,
+              300
+            );
+
+
+          if(!signedError && signedData?.signedUrl){
+
+            downloadHTML += `
+              <a
+                href="${signedData.signedUrl}"
+                target="_blank"
+                class="btnMain"
+                style="
+                  display:block;
+                  text-align:center;
+                  margin-top:12px;
+                "
+              >
+                ⬇ Download ${esc(
+                  ebook.title || item.title_snapshot
+                )}
+              </a>
+            `;
+
+          }
+
+        }
+
+      }
+
+    }
+
+
+    finalHTML += `
+      <div class="order">
+
+        <strong>
+          ${esc(order.order_code)}
+        </strong>
+
+        <p style="margin-top:8px">
+          ${order.order_items
+            .map(item => esc(item.title_snapshot))
+            .join(", ")}
+        </p>
+
+        <p>
+          Amount: ₹${Number(order.total_amount)}
+        </p>
+
+        <p>
+          Status:
+          <strong class="${statusClass}">
+            ${statusText}
+          </strong>
+        </p>
+
+        <p
+          style="
+            font-size:11px;
+            color:#80889f;
+            margin-top:5px
+          "
+        >
+          ${new Date(order.created_at).toLocaleString()}
+        </p>
+
+        ${downloadHTML}
+
+      </div>
+    `;
+
+  }
+
+
+  box.innerHTML = finalHTML;
+
+}
+
+/* =========================
+   SUPPORT
+   ========================= */
+
+async function submitSupport(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("sName")
+    .value.trim();
+
+  const email =
+    document.getElementById("sEmail")
+    .value.trim()
+    .toLowerCase();
+
+  const message =
+    document.getElementById("sMessage")
+    .value.trim();
+
+  if(!name || !email || !message){
+
+    showToast("Sabhi fields fill karo");
+
+    return;
+  }
+
+  showToast("Support request sending...");
+
+  const { error } = await db
+    .from("support_tickets")
+    .insert({
+      name: name,
+      email: email,
+      message: message,
+      status: "open"
+    });
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Support request send nahi hui");
+
+    return;
+  }
+
+  event.target.reset();
+
+  showToast("Support request sent ✅");
+
+}
+
+/* =========================
+   ADMIN LOGIN
+   ========================= */
+
+function openAdminLogin(){
+
+  document.getElementById("adminEmailInput").value="";
+  document.getElementById("adminPasswordInput").value="";
+
+  showModal("adminLoginModal");
+}
+
+
+async function adminLogin(){
+
+  const email =
+  document.getElementById("adminEmailInput")
+  .value.trim();
+
+  const password =
+  document.getElementById("adminPasswordInput")
+  .value;
+
+  if(!email || !password){
+
+    showToast("Email aur password enter karo");
+
+    return;
+  }
+
+  showToast("Admin login checking...");
+
+  const { data, error } =
+  await db.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Wrong email or password");
+
+    return;
+  }
+
+  const { data: isAdmin, error: adminError } =
+  await db.rpc("is_admin");
+
+  if(adminError || !isAdmin){
+
+    await db.auth.signOut();
+
+    showToast("Admin access denied");
+
+    return;
+  }
+
+  closeModal("adminLoginModal");
+
+  showModal("adminModal");
+
+  renderAdminOrders();
+
+  showToast("Admin login successful ✅");
+}
+
+/* =========================
+   ADMIN TABS
+   ========================= */
+
+function adminTab(tab,button){
+
+document
+.querySelectorAll(".tab")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+
+if(tab==="orders")
+renderAdminOrders();
+
+
+if(tab==="books")
+renderAdminBooks();
+
+
+if(tab==="settings")
+renderAdminSettings();
+
+
+if(tab==="support")
+renderAdminSupport();
+
+}
+
+
+
+/* =========================
+   ADMIN ORDERS
+   ========================= */
+
+async function renderAdminOrders(){
+
+const { data, error } = await db
+  .from("orders")
+  .select(`
+    id,
+    order_code,
+    customer_name,
+    email,
+    phone,
+    total_amount,
+    status,
+    created_at,
+    payment_submissions (
+      utr,
+      proof_url,
+      status
+    )
+  `)
+  .order("created_at", { ascending:false });
+
+if(error){
+
+  console.log(error);
+
+  showToast("Online orders load error");
+
+  return;
+}
+
+const orders = (data || []).map(row => ({
+
+  id: row.order_code || row.id,
+
+  dbId: row.id,
+
+  customerName: row.customer_name,
+
+  email: row.email,
+
+  phone: row.phone,
+
+  amount: Number(row.total_amount),
+
+  utr:
+  row.payment_submissions?.[0]?.utr || "",
+  
+  proofUrl:
+row.payment_submissions?.[0]?.proof_url || "",
+
+  proof:
+  row.payment_submissions?.[0]?.proof_url || "",
+
+  status: row.status,
+
+  date: row.created_at
+
+}));
+
+const area=
+document.getElementById("adminContent");
+
+
+if(orders.length===0){
+
+area.innerHTML=`
+
+<div class="order">
+
+No orders yet.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+area.innerHTML=
+
+orders.map(order=>`
+
+<div class="order">
+
+<strong>
+${esc(order.id)}
+</strong>
+
+<p style="margin-top:6px">
+
+Customer:
+${esc(order.customerName)}
+
+</p>
+
+<p>
+Email:
+${esc(order.email)}
+</p>
+
+<p>
+Phone:
+${esc(order.phone)}
+</p>
+
+<p>
+Amount:
+${money(order.amount)}
+</p>
+
+<p>
+UTR:
+${esc(order.utr)}
+</p>
+
+<p>
+
+Status:
+<strong class="${order.status}">
+${esc(order.status.toUpperCase())}
+</strong>
+
+</p>
+
+
+${order.proof
+?
+`
+
+<img
+src="${order.proof}"
+style="
+width:100%;
+max-width:230px;
+margin-top:10px;
+border-radius:10px
+">
+
+`
+:
+""
+}
+
+
+<div class="adminButtons">
+
+<button
+class="approveBtn"
+onclick="changeOrderStatus('${order.id}','approved')">
+
+Approve
+
+</button>
+
+
+<button
+class="rejectBtn"
+onclick="changeOrderStatus('${order.id}','rejected')">
+
+Reject
+
+</button>
+
+${order.proofUrl ? `
+<button
+class="approveBtn"
+onclick="viewPaymentProof('${order.proofUrl}')">
+View Payment Proof
+</button>
+` : ""}
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+async function viewPaymentProof(path){
+
+  if(!path){
+    showToast("Payment proof nahi mila");
+    return;
+  }
+
+  const { data, error } = await db.storage
+    .from("payment-proofs")
+    .createSignedUrl(path, 300);
+
+  if(error || !data?.signedUrl){
+    console.log(error);
+    showToast("Payment proof open nahi hua");
+    return;
+  }
+
+  window.open(data.signedUrl, "_blank");
+}
+
+async function changeOrderStatus(orderCode, status){
+
+  showToast("Updating order...");
+
+  const { data: updatedOrder, error } = await db
+    .from("orders")
+    .update({
+      status: status
+    })
+    .eq("order_code", orderCode)
+    .select("id")
+    .single();
+
+  if(error){
+
+    console.log(error);
+
+    showToast("Order update error");
+
+    return;
+  }
+
+  const { error: paymentError } = await db
+    .from("payment_submissions")
+    .update({
+      status: status
+    })
+    .eq("order_id", updatedOrder.id);
+
+  if(paymentError){
+    console.log(paymentError);
+  }
+
+  await renderAdminOrders();
+
+  if(status === "approved"){
+    showToast("Payment approved ✅");
+  }else{
+    showToast("Payment rejected");
+  }
+
+}
+
+
+/* =========================
+   ADMIN BOOKS
+   ========================= */
+
+async function renderAdminBooks(){
+const { data, error } = await db
+  .from("ebooks")
+  .select("*")
+  .order("created_at", { ascending:false });
+
+if(error){
+  console.log(error);
+  showToast("eBooks load nahi hui");
+  return;
+}
+
+books = (data || []).map(row => ({
+  id: row.id,
+  dbId: row.id,
+  title: row.title,
+  category: row.category,
+  price: Number(row.price),
+  oldPrice: Number(row.old_price || 0),
+  description: row.description || "",
+  cover: row.cover_class || "c1",
+  badge: row.cover_text || "BOOK",
+  download: row.file_url || ""
+}));
+const area=
+document.getElementById("adminContent");
+
+
+area.innerHTML=`
+
+<button
+class="btnMain full"
+onclick="addNewBook()">
+
++ Add New eBook
+
+</button>
+
+<br><br>
+
+${books.map(book=>`
+
+<div class="adminBook">
+
+<strong>
+${esc(book.title)}
+</strong>
+
+<p style="
+color:#929ab2;
+font-size:12px;
+margin-top:4px
+">
+
+${esc(book.category)}
+• ${money(book.price)}
+
+</p>
+
+<p style="
+font-size:11px;
+color:#737c95;
+margin-top:5px
+">
+
+Download:
+${book.download
+? "Configured ✅"
+: "Not configured"}
+
+</p>
+
+
+<div class="adminButtons">
+
+<button
+style="background:#525bd1"
+onclick="editBook('${book.id}')">
+
+Edit
+
+</button>
+
+<button
+class="rejectBtn"
+onclick="deleteBook('${book.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`).join("")}
+
+`;
+
+}
+
+async function editBook(id){
+
+  const book = books.find(book => book.id === id);
+  if(!book) return;
+
+  const title = prompt("eBook title:", book.title);
+  if(title === null) return;
+
+  const price = prompt("Price:", book.price);
+  if(price === null) return;
+
+  const filePath = prompt(
+    "Supabase PDF file path:",
+    book.download || ""
+  );
+  if(filePath === null) return;
+
+  const { error } = await db
+    .from("ebooks")
+    .update({
+      title: title.trim() || book.title,
+      price: Number(price) || book.price,
+      old_price: (Number(price) || book.price) * 2,
+      file_url: filePath.trim() || null
+    })
+    .eq("id", id);
+
+  if(error){
+    console.log(error);
+    showToast("eBook update nahi hui");
+    return;
+  }
+
+  await renderAdminBooks();
+  renderBooks();
+
+  showToast("eBook updated ✅");
+}
+
+
+async function addNewBook(){
+
+  const title = prompt("eBook title:");
+  if(!title) return;
+
+  const category = prompt(
+    "Category: AI, Programming, Business or Motivation",
+    "Business"
+  );
+  if(!category) return;
+
+  const price = prompt("Price:", "99");
+  if(!price) return;
+
+  const filePath = prompt(
+    "Supabase PDF file path:",
+    ""
+  );
+
+  const { error } = await db
+    .from("ebooks")
+    .insert({
+      title: title.trim(),
+      category: category.trim(),
+      price: Number(price) || 99,
+      old_price: (Number(price) || 99) * 2,
+      description: "Premium digital eBook by Sahil eBook Studio.",
+      cover_class: "c1",
+      cover_text: "NEW",
+      file_url: filePath?.trim() || null,
+      is_active: true
+    });
+
+  if(error){
+    console.log(error);
+    showToast("eBook add nahi hui");
+    return;
+  }
+
+  showToast("eBook added ✅");
+
+  await renderAdminBooks();
+  renderBooks();
+}
+
+async function deleteBook(id){
+
+  if(!confirm("Delete this eBook?")) return;
+
+  const { error } = await db
+    .from("ebooks")
+    .delete()
+    .eq("id", id);
+
+  if(error){
+    console.log(error);
+    showToast("eBook delete nahi hui");
+    return;
+  }
+
+  await renderAdminBooks();
+  renderBooks();
+
+  showToast("eBook deleted ✅");
+}
+
+
+
+/* =========================
+   ADMIN SETTINGS
+   ========================= */
+
+async function renderAdminSettings(){
+
+const { data: settings, error } = await db
+  .from("store_settings")
+  .select("upi_id, support_email")
+  .limit(1)
+  .maybeSingle();
+
+if(error){
+  console.log(error);
+  showToast("Settings load nahi hui");
+  return;
+}
+
+const upi = settings?.upi_id || "";
+const email = settings?.support_email || "";
+
+
+document.getElementById("adminContent").innerHTML=`
+
+<div class="box">
+
+<h3>
+Payment Settings
+</h3>
+
+<input
+id="settingUpi"
+class="input"
+placeholder="Google Pay / UPI ID"
+value="${esc(upi)}">
+
+
+<input
+id="settingEmail"
+class="input"
+type="email"
+placeholder="Support Email"
+value="${esc(email)}">
+
+
+<br><br>
+
+
+<button
+class="btnMain full"
+onclick="saveStoreSettings()">
+
+Save Store Settings
+
+</button>
+
+</div>
+
+
+<br>
+
+`;
+
+}
+
+
+async function saveStoreSettings(){
+
+  const upi =
+    document.getElementById("settingUpi")
+    .value.trim();
+
+  const email =
+    document.getElementById("settingEmail")
+    .value.trim();
+
+  if(!upi || !email){
+    showToast("UPI ID aur Email fill karo");
+    return;
+  }
+
+  const { data: settings, error: loadError } = await db
+    .from("store_settings")
+    .select("id")
+    .limit(1)
+    .maybeSingle();
+
+  if(loadError){
+    console.log(loadError);
+    showToast("Settings check nahi hui");
+    return;
+  }
+
+  let error;
+
+  if(settings){
+
+    const result = await db
+      .from("store_settings")
+      .update({
+        upi_id: upi,
+        support_email: email,
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", settings.id);
+
+    error = result.error;
+
+  }else{
+
+    const result = await db
+      .from("store_settings")
+      .insert({
+        upi_id: upi,
+        support_email: email
+      });
+
+    error = result.error;
+  }
+
+  if(error){
+    console.log(error);
+    showToast("Settings save nahi hui");
+    return;
+  }
+
+  showToast("Store settings saved ✅");
+}
+
+
+/* =========================
+   ADMIN SUPPORT
+   ========================= */
+
+async function renderAdminSupport(){
+
+const { data, error } = await db
+  .from("support_tickets")
+  .select("id, name, email, message, status, created_at")
+  .order("created_at", { ascending:false });
+
+if(error){
+
+  console.log(error);
+
+  showToast("Support tickets load error");
+
+  return;
+}
+
+const tickets = (data || []).map(ticket => ({
+  ...ticket,
+  date: ticket.created_at
+}));
+
+
+const area=
+document.getElementById("adminContent");
+
+
+if(tickets.length===0){
+
+area.innerHTML=`
+
+<div class="order">
+
+No support requests.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+area.innerHTML=
+
+tickets.map(ticket=>`
+
+<div class="order">
+
+<strong>
+${esc(ticket.id)}
+</strong>
+
+<p style="margin-top:7px">
+${esc(ticket.name)}
+</p>
+
+<p>
+${esc(ticket.email)}
+</p>
+
+<p style="
+margin-top:10px;
+color:#b4bad0
+">
+
+${esc(ticket.message)}
+
+</p>
+
+<p style="
+font-size:11px;
+color:#737b93;
+margin-top:8px
+">
+
+${esc(ticket.date)}
+
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* =========================
+   STORE INFO
+   ========================= */
+
+async function updateSupportEmail(){
+
+  const { data, error } = await db
+    .from("store_settings")
+    .select("support_email")
+    .limit(1)
+    .maybeSingle();
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  const email = data?.support_email || "";
+
+  document.getElementById("supportDisplay").innerText =
+    email
+    ? "Support Email: " + email
+    : "Support Email: Not configured";
+}
+
+async function loadOnlineBooks(){
+
+  showToast("Online eBooks loading...");
+
+  const { data, error } = await db
+    .from("ebooks")
+    .select("*")
+    .eq("is_active", true)
+    .order("created_at", { ascending: true });
+
+  if(error){
+    console.log(error);
+    showToast("Supabase connection error");
+    renderBooks();
+    return;
+  }
+
+  books = data.map((book, index) => ({
+    id: index + 1,
+    dbId: book.id,
+    title: book.title,
+    category: book.category,
+    price: Number(book.price),
+    oldPrice: Number(book.old_price || 0),
+    rating: "★★★★★",
+    cover: book.cover_class || "c1",
+    big: book.cover_text || "BOOK",
+    description: book.description || "",
+    learn: [
+      "Practical Concepts",
+      "Step by Step Learning",
+      "Real Examples"
+    ],
+    download: book.file_url || ""
+  }));
+
+  renderBooks();
+
+  showToast("Supabase connected ✅");
+}
+
+/* =========================
+   CLOSE MODAL ON BACKGROUND
+   ========================= */
+
+window.addEventListener(
+"click",
+event=>{
+
+if(event.target.classList.contains("modal")){
+
+event.target.classList.remove("show");
+
+}
+
+}
+);
+
+
+
+/* =========================
+   START WEBSITE
+   ========================= */
+
+addProofInput();
+
+loadOnlineBooks();
+
+updateCart();
+
+updateSupportEmail();
+
+</script>
+
+</body>
+</html>
