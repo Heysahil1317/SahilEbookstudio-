@@ -973,6 +973,22 @@ footer{grid-template-columns:1fr}
   text-shadow:0 5px 18px rgba(0,0,0,.45);
 }
 
+/* Laptop / short-desktop layout fix: keep hero text clear of the open book */
+@media (min-width:751px) and (max-height:820px){
+  .homeHero{min-height:600px}
+  .homeHeroContent{top:13%;width:min(760px,86%)}
+  .homeHeroContent h1{font-size:clamp(46px,5vw,66px);line-height:.93}
+  .homeHeroContent p{max-width:500px;margin:12px auto 8px;font-size:12px;line-height:1.55}
+  .homeExplore{margin-top:0;padding:11px 22px}
+  .homeBookScene{width:390px;height:275px;bottom:-2%}
+  .homePage{height:210px;top:24px}
+  .homeFlipPage{height:208px;top:25px}
+  .homePageContent{padding:28px 22px}
+  .homePage h2{font-size:24px;margin-top:12px}
+  .homePage p{margin-top:12px}
+  .homeLamp{top:7%}
+}
+
 @media(max-width:750px){
   .homeHero{min-height:680px}.homeNavlinks{display:none}.homeNav{padding:20px 5%}.homeLogo{font-size:16px}.homeNavActions{gap:6px}.homeAccountBtn{padding:9px 13px;font-size:12px}.homeCartBtn{padding:9px 10px}.homeCartBtn .cartLabel{display:none}.homeHeroContent{top:21%}.homeHeroContent h1{font-size:47px}.homeHeroContent p{max-width:330px;font-size:11px}.homeLeftShelf,.homeRightShelf{width:30%;opacity:.72}.homeLeftShelf{left:-15%}.homeRightShelf{right:-15%}.homeBookScene{width:330px;height:250px;bottom:6%}.homePage{height:185px}.homeFlipPage{height:183px}.homePageContent{padding:25px 15px}.homePage h2{font-size:19px}.homePage p{font-size:7px}.homeLamp{top:11%}.homeLampShade{width:100px;height:45px}.homeLampWire{height:55px}.homeLampLight{width:380px}.homeSmallTitle{letter-spacing:3px;font-size:8px}
   #ebooks .titleOnlyCover{width:100%;height:285px;transform:none}
@@ -1326,8 +1342,8 @@ Google Pay, PhonePe, Paytm ya kisi bhi UPI app se payment karein.
 id="gpayButton"
 class="btnMain full"
 style="display:none"
-onclick="openGpay()">
-Pay with Google Pay / UPI
+onclick="submitOrder()">
+Pay Now via UPI
 </button>
 
 </div>
@@ -1341,13 +1357,10 @@ UPI ID abhi configure nahi hai.
 <input id="buyerName" class="input" placeholder="Customer Name">
 <input id="buyerEmail" class="input" type="email" placeholder="Email">
 <input id="buyerPhone" class="input" type="tel" placeholder="Phone Number">
-<input id="utr" class="input" placeholder="Transaction / UTR Number">
 
-<br><br>
-
-<button class="btnMain full" onclick="submitOrder()">
-Submit Payment
-</button>
+<p style="margin-top:14px;color:#8f97b1;font-size:12px;line-height:1.6">
+No UTR. No payment screenshot. Tap <b>Pay Now via UPI</b> and complete payment in your UPI app.
+</p>
 
 </div>
 </div>
@@ -2223,7 +2236,7 @@ qr.style.display="block";
 payButton.style.display="block";
 
 warning.innerHTML=
-"✅ UPI ID configured. Payment ke baad UTR number submit karein.";
+"✅ Direct UPI payment ready. UTR ya screenshot ki zarurat nahi.";
 
 }else{
 
@@ -2238,6 +2251,17 @@ warning.innerHTML=
 
 }
 
+
+const { data: checkoutUserData } = await db.auth.getUser();
+const checkoutUser = checkoutUserData?.user || null;
+if(checkoutUser){
+  const n = document.getElementById("buyerName");
+  const e = document.getElementById("buyerEmail");
+  const ph = document.getElementById("buyerPhone");
+  if(n && !n.value) n.value = checkoutUser.user_metadata?.full_name || "";
+  if(e) e.value = checkoutUser.email || "";
+  if(ph && !ph.value) ph.value = checkoutUser.user_metadata?.mobile || "";
+}
 
 showModal("checkoutModal");
 
@@ -2263,209 +2287,47 @@ window.location.href=link;
 
 
 /* =========================
-   PAYMENT PROOF
-   ========================= */
-
-function addProofInput(){
-
-const utr=document.getElementById("utr");
-
-if(document.getElementById("paymentProof"))
-return;
-
-
-utr.insertAdjacentHTML(
-"afterend",
-`
-
-<div style="margin-top:13px">
-
-<label
-style="
-font-size:12px;
-color:#a9b0c4
-">
-
-Payment Screenshot (Optional)
-
-</label>
-
-<input
-id="paymentProof"
-class="input"
-type="file"
-accept="image/*">
-
-</div>
-
-`
-);
-
-}
-
-
-function fileToDataURL(file){
-
-return new Promise((resolve,reject)=>{
-
-const reader=new FileReader();
-
-reader.onload=()=>resolve(reader.result);
-
-reader.onerror=reject;
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-
-
-/* =========================
-   SUBMIT ORDER
+   DIRECT UPI PAYMENT
    ========================= */
 
 async function submitOrder(){
 
 const upi = window.currentStoreUpi || "";
 
-
 if(!upi){
-
-showToast("First configure UPI ID");
-
-return;
-
+  showToast("UPI ID not configured");
+  return;
 }
 
+const name = document.getElementById("buyerName").value.trim();
+const email = document.getElementById("buyerEmail").value.trim().toLowerCase();
+const phone = document.getElementById("buyerPhone").value.trim();
 
-const name=
-document.getElementById("buyerName")
-.value.trim();
+if(!name){ showToast("Enter customer name"); return; }
+if(!email || !email.includes("@")){ showToast("Enter valid email"); return; }
+if(!phone){ showToast("Enter phone number"); return; }
 
-const email=
-document.getElementById("buyerEmail")
-.value.trim()
-.toLowerCase();
-
-const phone=
-document.getElementById("buyerPhone")
-.value.trim();
-
-const utr=
-document.getElementById("utr")
-.value.trim();
-
-
-if(!name){
-
-showToast("Enter customer name");
-
-return;
-
-}
-
-
-if(!email || !email.includes("@")){
-
-showToast("Enter valid email");
-
-return;
-
-}
-
-
-if(!phone){
-
-showToast("Enter phone number");
-
-return;
-
-}
-
-
-if(!utr){
-
-showToast("Enter UTR number");
-
-return;
-
-}
-
-
-let proof="";
-
-const fileInput=
-document.getElementById("paymentProof");
-
-
-if(
-fileInput
-&& fileInput.files
-&& fileInput.files[0]
-){
-
-const file=fileInput.files[0];
-
-
-if(file.size > 650000){
-
-showToast("Screenshot 650KB se chhota rakho");
-
-return;
-
-}
-
-
-try{
-
-proof=await fileToDataURL(file);
-
-}catch(error){
-
-proof="";
-
-}
-
-}
-
-/* ===== SAVE ORDER TO SUPABASE ===== */
-
-const onlineOrderId = crypto.randomUUID();
-
-const onlineOrderCode =
-"SES" + Date.now().toString().slice(-8);
-
-const onlineTotal = checkoutBooks.reduce(
-  (sum, item) => sum + Number(item.price),
-  0
-);
-
-const { data: userData, error: userError } =
-await db.auth.getUser();
-
+const { data: userData, error: userError } = await db.auth.getUser();
 const loggedUser = userData?.user;
 
 if(userError || !loggedUser){
-
   showToast("Pehle customer account me login karo");
-
   return;
 }
 
-if(
-  email.toLowerCase() !==
-  loggedUser.email.toLowerCase()
-)
-
-{
-
+if(email !== loggedUser.email.toLowerCase()){
   showToast("Checkout me wahi email dalo jisse login kiya hai");
-
   return;
 }
-/* CREATE ORDER */
+
+if(!checkoutBooks.length){
+  showToast("Cart empty hai");
+  return;
+}
+
+const onlineOrderId = crypto.randomUUID();
+const onlineOrderCode = "SES" + Date.now().toString().slice(-8);
+const onlineTotal = checkoutBooks.reduce((sum, item) => sum + Number(item.price), 0);
 
 const { error: orderError } = await db
   .from("orders")
@@ -2480,18 +2342,11 @@ const { error: orderError } = await db
     status: "pending"
   });
 
-
 if(orderError){
-
   console.log(orderError);
-
-  showToast("Online order save error");
-
+  showToast("Order create nahi hua");
   return;
 }
-
-
-/* CREATE ORDER ITEMS */
 
 const onlineItems = checkoutBooks.map(book => ({
   order_id: onlineOrderId,
@@ -2500,98 +2355,36 @@ const onlineItems = checkoutBooks.map(book => ({
   price_snapshot: Number(book.price)
 }));
 
-
-const { error: itemError } = await db
-  .from("order_items")
-  .insert(onlineItems);
-
+const { error: itemError } = await db.from("order_items").insert(onlineItems);
 
 if(itemError){
-
   console.log(itemError);
-
   showToast("Order items save error");
-
   return;
 }
 
+const paymentNote = `Order ${onlineOrderCode}`;
+const upiLink =
+"upi://pay"
++"?pa="+encodeURIComponent(upi)
++"&pn="+encodeURIComponent("Sahil eBook Studio")
++"&am="+encodeURIComponent(onlineTotal)
++"&cu=INR"
++"&tn="+encodeURIComponent(paymentNote);
 
-
-let proofPath = null;
-
-const proofFile =
-  document.getElementById("paymentProof")?.files?.[0];
-
-if(proofFile){
-
-  const ext =
-    proofFile.name.split(".").pop() || "jpg";
-
-  proofPath =
-    `${loggedUser.id}/${onlineOrderId}-${Date.now()}.${ext}`;
-
-  const { error: uploadError } = await db.storage
-    .from("payment-proofs")
-    .upload(proofPath, proofFile);
-
-  if(uploadError){
-    console.log(uploadError);
-    showToast("Payment screenshot upload nahi hui");
-    return;
-  }
-}
-
-/* SAVE UTR / PAYMENT */
-
-/* SAVE UTR / PAYMENT */
-
-const { error: paymentError } = await db
-  .from("payment_submissions")
-  .insert({
-    order_id: onlineOrderId,
-    utr: utr,
-    proof_url: proofPath,
-    status: "pending"
-  });
-
-
-if(paymentError){
-
-  console.log(paymentError);
-
-  showToast("Payment details save error");
-
-  return;
-}
-
-
-showToast("Online order saved ✅");
-
-
-cart=[];
-
+cart = [];
 saveCart();
+checkoutBooks = [];
 
-checkoutBooks=[];
-
-
-document.getElementById("buyerName").value="";
-document.getElementById("buyerEmail").value="";
-document.getElementById("buyerPhone").value="";
-document.getElementById("utr").value="";
-
-
-if(fileInput)
-fileInput.value="";
-
+document.getElementById("buyerName").value = "";
+document.getElementById("buyerEmail").value = "";
+document.getElementById("buyerPhone").value = "";
 
 closeModal("checkoutModal");
-
-showToast("Order submitted ✅");
+showToast("UPI app open ho rahi hai...");
+setTimeout(() => { window.location.href = upiLink; }, 250);
 
 }
-
-
 
 /* =========================
    CUSTOMER DASHBOARD - EMAIL OTP
@@ -4029,8 +3822,6 @@ db.auth.getSession().then(({data}) => {
 db.auth.onAuthStateChange((_event, session) => {
   updateCustomerNav(session?.user || null);
 });
-
-addProofInput();
 
 loadOnlineBooks();
 
